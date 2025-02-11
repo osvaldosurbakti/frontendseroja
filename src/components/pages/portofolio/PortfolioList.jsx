@@ -1,25 +1,33 @@
-// File: src/components/portofolio/PortfolioList.js
-
 import React from "react";
 import { Link } from "react-router-dom";
-
-const portfolioItems = [
-  { id: 1, title: "Proyek A", description: "Deskripsi singkat proyek A" },
-  { id: 2, title: "Proyek B", description: "Deskripsi singkat proyek B" },
-  { id: 3, title: "Proyek C", description: "Deskripsi singkat proyek C" },
-];
+import portfolioItems from "../../../data/portfolioItems"; // Impor data dummy
 
 const PortfolioList = () => {
+  // Filter portofolio dengan status aktif
+  const activePortfolios = portfolioItems.filter((item) => item.status === "active");
+
+  if (!activePortfolios.length) {
+    return <p className="text-center text-gray-600">Belum ada portofolio tersedia.</p>;
+  }
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {portfolioItems.map((item) => (
-        <div key={item.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {activePortfolios.map((item) => (
+        <div
+          key={item._id}
+          className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-lg transition duration-300"
+        >
+          <img
+            src={item.imageUrl}
+            alt={item.title}
+            className="w-full h-48 object-cover"
+          />
           <div className="p-4">
-            <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-            <p className="text-gray-600 mb-4">{item.description}</p>
+            <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
+            <p className="text-gray-600 text-sm mt-2">{item.description}</p>
             <Link
-              to={`/portofolio/${item.id}`}
-              className="text-blue-600 hover:underline"
+              to={`/portofolio/${item._id}`}
+              className="block mt-4 text-blue-600 hover:underline"
             >
               Lihat Detail
             </Link>

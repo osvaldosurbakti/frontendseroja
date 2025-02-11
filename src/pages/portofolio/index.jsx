@@ -1,5 +1,3 @@
-// File: src/pages/portofolio/index.js
-
 import React from "react";
 import PortfolioList from "../../components/pages/portofolio/PortfolioList";
 
@@ -13,4 +11,5 @@ const PortfolioPage = () => {
     </section>
   );
 };
+
 export default PortfolioPage;

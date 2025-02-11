@@ -1,5 +1,3 @@
-// File: src/pages/portofolio/[id].js
-
 import React from "react";
 import { useParams } from "react-router-dom";
 import PortfolioDetail from "../../components/pages/portofolio/PortfolioDetail";
