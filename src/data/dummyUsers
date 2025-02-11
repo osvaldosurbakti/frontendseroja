@@ -1,0 +1,18 @@
+const dummyUsers = [
+  {
+    _id: "1",
+    name: "Admin User",
+    email: "admin@example.com",
+    password: "admin123", // Dummy password (in real-world scenarios, always hash passwords)
+    role: "admin",
+  },
+  {
+    _id: "2",
+    name: "Superadmin User",
+    email: "superadmin@example.com",
+    password: "superadmin123",
+    role: "superadmin",
+  },
+];
+
+export default dummyUsers;
