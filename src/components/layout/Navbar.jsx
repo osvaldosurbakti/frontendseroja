@@ -5,11 +5,16 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-blue-600 text-white shadow-lg">
+    <nav className="bg-gradient-to-r from-blue-600 to-blue-800 text-white shadow-lg">
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
         {/* Logo */}
         <div className="text-2xl font-bold">
-          <Link to="/" className="hover:text-gray-200">
+          <Link to="/" className="hover:text-gray-200 transition duration-300 flex items-center">
+            <img
+              src="/logo.png" // Ganti dengan path logo perusahaan Anda
+              alt="Seroja Medan Group Logo"
+              className="h-10 w-10 mr-2"
+            />
             Seroja Medan Group
           </Link>
         </div>
@@ -46,36 +51,48 @@ const Navbar = () => {
 
         {/* Navigation Links */}
         <ul
-          className={`md:flex space-x-6 md:space-x-6 items-center md:static absolute left-0 top-full w-full md:w-auto bg-blue-600 md:bg-transparent transition-all duration-300 ease-in-out ${
+          className={`md:flex space-x-6 md:space-x-8 items-center md:static absolute left-0 top-full w-full md:w-auto bg-blue-600 md:bg-transparent transition-all duration-300 ease-in-out ${
             isMenuOpen ? "block" : "hidden"
           }`}
         >
           <li className="text-center py-2 md:py-0">
-            <Link to="/" className="text-lg hover:text-gray-200 transition duration-300">
-              Home
+            <Link
+              to="/"
+              className="text-lg hover:text-gray-200 transition duration-300 flex items-center"
+            >
+              <span className="mr-1"></span> Home
             </Link>
           </li>
           <li className="text-center py-2 md:py-0">
-            <Link to="/tentang-kami" className="text-lg hover:text-gray-200 transition duration-300">
-              Tentang Kami
+            <Link
+              to="/tentang-kami"
+              className="text-lg hover:text-gray-200 transition duration-300 flex items-center"
+            >
+              <span className="mr-1"></span> Tentang Kami
             </Link>
           </li>
           <li className="text-center py-2 md:py-0">
-            <Link to="/portofolio" className="text-lg hover:text-gray-200 transition duration-300">
-              Portofolio
+            <Link
+              to="/portofolio"
+              className="text-lg hover:text-gray-200 transition duration-300 flex items-center"
+            >
+              <span className="mr-1"></span> Portofolio
             </Link>
           </li>
           <li className="text-center py-2 md:py-0">
-  <a
-    href="/karir"
-    className="text-lg hover:text-gray-200 transition duration-300"
-  >
-    Karir
-  </a>
-</li>
-
+            <Link
+              to="/karir"
+              className="text-lg hover:text-gray-200 transition duration-300 flex items-center"
+            >
+              <span className="mr-1"></span> Karir
+            </Link>
+          </li>
+          {/* CTA Button */}
           <li className="text-center py-2 md:py-0">
-            <Link to="/hubungi-kami" className="text-lg hover:text-gray-200 transition duration-300">
+            <Link
+              to="/hubungi-kami"
+              className="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-gray-200 transition duration-300 font-semibold"
+            >
               Hubungi Kami
             </Link>
           </li>
