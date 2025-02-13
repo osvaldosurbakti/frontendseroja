@@ -1,18 +1,22 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext"; // Impor useAuth
+import { useAuth } from "../../context/AuthContext";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa"; // Ikon untuk tombol buka/tutup sidebar
 
-
-const Sidebar = ({ role }) => {
+const Sidebar = ({ role, isSidebarOpen, onToggleSidebar }) => {
   const navigate = useNavigate();
-  const { logout } = useAuth(); // Gunakan logout dari AuthContext
+  const { logout } = useAuth();
 
   const handleLogout = () => {
-    logout(); // Panggil fungsi logout dari AuthContext
-    navigate("/"); // Redirect ke halaman home setelah logout
+    logout();
+    navigate("/");
   };
 
-  // Menu untuk admin
+  if (!role) {
+    navigate("/login");
+    return null;
+  }
+
   const adminMenu = [
     { label: "Dashboard", path: "/admin" },
     { label: "Manajemen Portofolio", path: "/admin/portofolio" },
@@ -22,44 +26,78 @@ const Sidebar = ({ role }) => {
     { label: "Daftar Pelamar", path: "/admin/applicants" },
   ];
 
-  // Menu tambahan untuk superadmin
   const superadminMenu = [
     { label: "Dashboard Superadmin", path: "/superadmin" },
     { label: "Manajemen Pengguna", path: "/superadmin/users" },
     { label: "Riwayat Aktivitas", path: "/superadmin/history" },
   ];
 
-  // Gabungkan menu jika user adalah superadmin
   const menuItems = role === "superadmin" ? [...adminMenu, ...superadminMenu] : adminMenu;
 
   return (
-    <aside className="w-64 bg-gray-800 text-white h-screen p-4">
-      <h2 className="text-lg font-bold mb-6">
+    <div className="fix h-full">
+      <aside
+  className={`bg-gray-800 text-white h-full p-4 z-40 transition-all duration-300 flex flex-col ${
+    isSidebarOpen ? "w-64" : "w-16"
+  }`}
+  style={{
+    position: "fixed",
+    top: "4rem", // Sidebar mulai dari bawah navbar
+    height: "calc(100vh - 4rem)", // Sidebar mengikuti tinggi layar
+    overflowY: "auto", // Memungkinkan scrolling
+  }}
+>
+  <div className="flex justify-between items-center mb-6">
+    {isSidebarOpen && (
+      <h2 className="text-lg font-bold">
         Dashboard {role.charAt(0).toUpperCase() + role.slice(1)}
       </h2>
-      <ul className="space-y-4">
-        {menuItems.map((item, idx) => (
-          <li key={idx}>
-            <NavLink
-              to={item.path}
-              className={({ isActive }) =>
-                `block py-2 px-3 rounded hover:bg-gray-700 ${
-                  isActive ? "bg-gray-700" : ""
-                }`
-              }
-            >
-              {item.label}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
-      <button
-        onClick={handleLogout}
-        className="mt-6 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 w-full"
-      >
-        Logout
-      </button>
-      </aside>
+    )}
+
+    <button
+      onClick={onToggleSidebar}
+      className="text-white bg-gray-700 rounded p-1 hover:bg-gray-600"
+    >
+      {isSidebarOpen ? <FaChevronLeft size={20} /> : <FaChevronRight size={20} />}
+    </button>
+  </div>
+
+  <ul className="space-y-4">
+    {menuItems.map((item, idx) => (
+      <li key={idx}>
+        <NavLink
+          to={item.path}
+          className={({ isActive }) =>
+            `block py-2 px-3 rounded hover:bg-gray-700 ${
+              isActive ? "bg-gray-700" : ""
+            } ${isSidebarOpen ? "text-white" : "text-gray-300"}`
+          }
+          title={item.label}
+        >
+          {isSidebarOpen ? item.label : item.label[0]}
+        </NavLink>
+      </li>
+    ))}
+  </ul>
+
+  <button
+    onClick={handleLogout}
+    className={`mt-auto bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 w-full ${
+      isSidebarOpen ? "block" : "hidden"
+    }`}
+  >
+    Logout
+  </button>
+</aside>
+
+
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black opacity-50 z-30 lg:hidden"
+          onClick={onToggleSidebar}
+        ></div>
+      )}
+    </div>
   );
 };
 

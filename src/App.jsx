@@ -1,131 +1,53 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useAuth } from "./context/AuthContext";
 import Navbar from "./components/layout/Navbar";
 import Sidebar from "./components/layout/Sidebar";
+import Footer from "./components/layout/Footer";
+import { routes } from "./routes";
 
-// Public Pages
-import Home from "./pages/home";
-import TentangKami from "./pages/tentangKami";
-import HubungiKami from "./pages/hubungiKami";
-import PortfolioPage from "./pages/portofolio";
-import PortfolioDetailPage from "./pages/portofolio/[id]";
-import Karir from "./pages/karir";
-import JobDetail from "./pages/karir/[id]";
-import ApplicationForm from "./pages/karir/apply";
-import Login from "./pages/login";
 
-// Admin Pages
-import AdminDashboard from "./pages/admin";
-import PortfolioManagement from "./pages/admin/portofolio";
-import JobManagement from "./pages/admin/jobs";
-import WhatsappSettings from "./pages/admin/whatsapp";
-import Statistics from "./pages/admin/statistics";
-import Applicants from "./pages/admin/applicants";
-import ApplicantDetail from "./pages/admin/[id]";
+const App = () => {
+  const { userRole } = useAuth(); // Fetch user role from context
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-// Superadmin Pages
-import SuperadminDashboard from "./pages/superadmin";
-import ManageUsers from "./pages/superadmin/users";
-import ActivityHistory from "./pages/superadmin/history";
-
-// Protected Route Component
-const ProtectedRoute = ({ role, requiredRoles, children, fallback }) => {
-  if (!role || !requiredRoles.includes(role)) {
-    return fallback || <Navigate to="/login" />;
-  }
-  return children;
-};
-
-function App() {
-  const { userRole } = useAuth();
-
-  // Routes for admin
-  const adminRoutes = [
-    { path: "/admin", component: <AdminDashboard /> },
-    { path: "/admin/portofolio", component: <PortfolioManagement /> },
-    { path: "/admin/jobs", component: <JobManagement /> },
-    { path: "/admin/whatsapp", component: <WhatsappSettings /> },
-    { path: "/admin/statistics", component: <Statistics /> },
-    { path: "/admin/applicants", component: <Applicants /> },
-    { path: "/admin/applicants/:id", component: <ApplicantDetail /> },
-  ];
-
-  // Routes for superadmin
-  const superadminRoutes = [
-    { path: "/superadmin", component: <SuperadminDashboard /> },
-    { path: "/superadmin/users", component: <ManageUsers /> },
-    { path: "/superadmin/history", component: <ActivityHistory /> },
-  ];
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prev) => !prev);
+  };
 
   return (
     <Router>
-      {/* Navbar is always visible */}
-      <Navbar />
-
-      <div className="flex">
-        {/* Sidebar for admin and superadmin */}
-        {(userRole === "admin" || userRole === "superadmin") && (
-          <Sidebar role={userRole} />
-        )}
-
-        <div className="flex-1 p-4">
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="/tentang-kami" element={<TentangKami />} />
-            <Route path="/hubungi-kami" element={<HubungiKami />} />
-            <Route path="/portofolio" element={<PortfolioPage />} />
-            <Route path="/portofolio/:id" element={<PortfolioDetailPage />} />
-            <Route path="/karir" element={<Karir />} />
-            <Route path="/karir/:id" element={<JobDetail />} />
-            <Route path="/karir/apply/:id" element={<ApplicationForm />} />
-            <Route
-              path="/login"
-              element={
-                userRole === "admin" ? (
-                  <Navigate to="/admin" />
-                ) : userRole === "superadmin" ? (
-                  <Navigate to="/superadmin" />
-                ) : (
-                  <Login />
-                )
-              }
-            />
-
-            {/* Admin Routes */}
-            {adminRoutes.map(({ path, component }) => (
-              <Route
-                key={path}
-                path={path}
-                element={
-                  <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
-                    {component}
-                  </ProtectedRoute>
-                }
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <div className="flex flex-1 overflow-hidden">
+          {userRole && (userRole === "admin" || userRole === "superadmin") && (
+            <aside
+              className={`bg-gray-800 text-white p-4 z-40 transition-all duration-300 ${
+                isSidebarOpen ? "w-64" : "w-16"
+              }`}
+            >
+              <Sidebar
+                role={userRole}
+                isSidebarOpen={isSidebarOpen}
+                onToggleSidebar={toggleSidebar}
               />
-            ))}
+            </aside>
+          )}
 
-            {/* Superadmin Routes */}
-            {superadminRoutes.map(({ path, component }) => (
-              <Route
-                key={path}
-                path={path}
-                element={
-                  <ProtectedRoute role={userRole} requiredRoles={["superadmin"]}>
-                    {component}
-                  </ProtectedRoute>
-                }
-              />
-            ))}
+          <main className="flex-1 bg-gray-100 p-6">
+            <Routes>
+              {routes(userRole).map(({ path, element }, index) => (
+                <Route key={index} path={path} element={element} />
+              ))}
+            </Routes>
 
-            {/* Redirect to home for undefined routes */}
-            <Route path="*" element={<Navigate to="/" />} />
-          </Routes>
+            {/* Footer tidak ditampilkan jika user adalah admin atau superadmin */}
+            {!(userRole === "admin" || userRole === "superadmin") && <Footer />}
+          </main>
         </div>
       </div>
     </Router>
   );
-}
+};
 
 export default App;

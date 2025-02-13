@@ -1,0 +1,24 @@
+{
+
+  "header": {
+    "home": "Beranda",
+    "portfolio": "Portofolio",
+    "career": "Karir",
+    "contact": "Kontak"
+  },
+    "footer": {
+      "about_us": "Tentang Kami",
+      "about_description": "Seroja Medan Group adalah perusahaan terkemuka di bidang konstruksi dan desain, berkomitmen untuk memberikan solusi terbaik bagi klien kami.",
+      "quick_links": "Link Cepat",
+      "home": "Beranda",
+      "portfolio": "Portofolio",
+      "career": "Karir",
+      "contact": "Kontak",
+      "email": "Email",
+      "phone": "Telepon",
+      "address": "Alamat",
+      "social_media": "Sosial Media",
+      "copyright": "Hak cipta dilindungi"
+    }
+  }
+  

@@ -1,2 +1,5 @@
-/* ./src/styles.css */
 @import "tailwindcss";
+
+body {
+  overflow: visible; /* Pastikan body tidak memblokir scroll */
+}

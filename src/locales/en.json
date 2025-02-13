@@ -1,0 +1,26 @@
+{
+
+  "header": {
+    "about_us": "About Us",
+    "home": "Home",
+    "portfolio": "Portfolio",
+    "career": "Career",
+    "contact": "Contact"
+  },
+
+    "footer": {
+      "about_us": "About Us",
+      "about_description": "Seroja Medan Group is a leading company in construction and design, committed to providing the best solutions for our clients.",
+      "quick_links": "Quick Links",
+      "home": "Home",
+      "portfolio": "Portfolio",
+      "career": "Career",
+      "contact": "Contact",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "social_media": "Social Media",
+      "copyright": "All rights reserved"
+    }
+  }
+  
