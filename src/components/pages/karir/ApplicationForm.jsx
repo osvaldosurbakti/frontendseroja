@@ -1,13 +1,15 @@
-// src/components/pages/karir/ApplicationForm.js
 import React, { useState } from "react";
+import { FaUser, FaEnvelope, FaPhone, FaFileAlt, FaPaperPlane } from "react-icons/fa";
 
 const ApplicationForm = ({ jobId }) => {
   const [formData, setFormData] = useState({
     applicantName: "",
     email: "",
     phone: "",
-    resume: null, // File yang diunggah
+    resume: null,
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -19,87 +21,112 @@ const ApplicationForm = ({ jobId }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     // Simulasikan pembuatan URL untuk file resume
-    const resumeUrl = formData.resume
-      ? URL.createObjectURL(formData.resume)
-      : "";
+    const resumeUrl = formData.resume ? URL.createObjectURL(formData.resume) : "";
 
-    // Data sesuai dengan format database
     const applicationData = {
-      jobId: jobId, // ID pekerjaan yang dilamar
+      jobId,
       applicantName: formData.applicantName,
       email: formData.email,
       phone: formData.phone,
-      resumeUrl: resumeUrl, // URL file resume
+      resumeUrl,
       createdAt: new Date().toISOString(),
-      status: "new", // Default status
+      status: "new",
     };
 
     console.log("Data Lamaran:", applicationData);
 
-    // Tambahkan logika pengiriman data ke backend di sini
+    setTimeout(() => {
+      alert("Lamaran berhasil dikirim!");
+      setIsSubmitting(false);
+    }, 2000);
   };
 
   return (
-    <div className="container mx-auto py-8">
-      <h2 className="text-3xl font-bold mb-6">Formulir Lamaran</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">
-            Nama Lengkap
-          </label>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Nama Lengkap */}
+      <div>
+        <label className="block text-gray-700 font-medium mb-2">
+          Nama Lengkap
+        </label>
+        <div className="relative">
+          <FaUser className="absolute left-3 top-3 text-gray-400" />
           <input
             type="text"
             name="applicantName"
             value={formData.applicantName}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded p-2"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">Email</label>
+      </div>
+
+      {/* Email */}
+      <div>
+        <label className="block text-gray-700 font-medium mb-2">Email</label>
+        <div className="relative">
+          <FaEnvelope className="absolute left-3 top-3 text-gray-400" />
           <input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded p-2"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">
-            Nomor Telepon
-          </label>
+      </div>
+
+      {/* Nomor Telepon */}
+      <div>
+        <label className="block text-gray-700 font-medium mb-2">
+          Nomor Telepon
+        </label>
+        <div className="relative">
+          <FaPhone className="absolute left-3 top-3 text-gray-400" />
           <input
             type="text"
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded p-2"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
-        <div>
-          <label className="block text-gray-700 font-medium mb-2">Resume</label>
+      </div>
+
+      {/* Upload Resume */}
+      <div>
+        <label className="block text-gray-700 font-medium mb-2">Resume</label>
+        <div className="relative">
+          <FaFileAlt className="absolute left-3 top-3 text-gray-400" />
           <input
             type="file"
             name="resume"
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded p-2"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          Kirim Lamaran
-        </button>
-      </form>
-    </div>
+      </div>
+
+      {/* Tombol Kirim */}
+      <button
+        type="submit"
+        className="w-full flex items-center justify-center bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 disabled:opacity-50"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? (
+          <span className="animate-spin mr-2">⏳</span>
+        ) : (
+          <FaPaperPlane className="mr-2" />
+        )}
+        {isSubmitting ? "Mengirim..." : "Kirim Lamaran"}
+      </button>
+    </form>
   );
 };
 

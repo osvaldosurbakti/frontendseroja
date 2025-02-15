@@ -1,35 +1,61 @@
 import React from "react";
-import dummyJobs from "../../../data/dummyJobs";
+import { Link } from "react-router-dom";
+import { FaMapMarkerAlt, FaMoneyBillWave, FaArrowRight, FaBriefcase, FaUserGraduate } from "react-icons/fa";
 
-const JobList = () => {
-  // Gunakan data dummy untuk simulasi
-  const jobs = dummyJobs.filter((job) => job.status === "open"); // Hanya tampilkan lowongan 'open'
-
+const JobList = ({ jobs }) => {
   if (!jobs || jobs.length === 0) {
-    return <p className="text-center">Belum ada lowongan pekerjaan tersedia.</p>;
+    return (
+      <div className="text-center text-gray-600">
+        <p className="text-lg">Maaf, belum ada lowongan pekerjaan yang tersedia.</p>
+      </div>
+    );
   }
 
   return (
-    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {jobs.map((job) => (
-        <li
+        <div
           key={job._id}
-          className="border border-gray-200 p-6 rounded-lg shadow hover:shadow-lg transition duration-300"
+          className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 border border-gray-200"
         >
+          {/* Posisi Pekerjaan */}
           <h2 className="text-xl font-bold text-gray-800">{job.title}</h2>
-          <p className="text-gray-600 mt-2">{job.location}</p>
-          <p className="text-sm text-gray-500 mt-1">
-            {job.salaryRange || "Gaji tidak disebutkan"}
-          </p>
-          <a
-            href={`/karir/${job._id}`}
-            className="inline-block mt-4 text-blue-600 hover:underline"
+          
+          {/* Lokasi */}
+          <div className="flex items-center text-gray-600 mt-2">
+            <FaMapMarkerAlt className="mr-2 text-blue-600" />
+            <p>{job.location}</p>
+          </div>
+
+          {/* Gaji */}
+          <div className="flex items-center text-gray-500 text-sm mt-2">
+            <FaMoneyBillWave className="mr-2 text-green-500" />
+            <p>{job.salaryRange || "Gaji tidak disebutkan"}</p>
+          </div>
+
+          {/* Jenis Pekerjaan */}
+          <div className="flex items-center text-gray-600 text-sm mt-2">
+            <FaBriefcase className="mr-2 text-purple-500" />
+            <p>{job.employmentType}</p>
+          </div>
+
+          {/* Tingkat Pengalaman */}
+          <div className="flex items-center text-gray-600 text-sm mt-2">
+            <FaUserGraduate className="mr-2 text-orange-500" />
+            <p>{job.experienceLevel}</p>
+          </div>
+
+          {/* Tombol Detail */}
+          <Link
+            to={`/karir/${job._id}`}
+            className="mt-4 inline-flex items-center text-blue-600 font-medium hover:underline"
           >
             Lihat Detail
-          </a>
-        </li>
+            <FaArrowRight className="ml-2" />
+          </Link>
+        </div>
       ))}
-    </ul>
+    </div>
   );
 };
 
