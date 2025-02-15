@@ -1,12 +1,21 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { FaMapMarkerAlt, FaMoneyBillWave, FaArrowRight, FaBriefcase, FaUserGraduate } from "react-icons/fa";
+import {
+  FaMapMarkerAlt,
+  FaMoneyBillWave,
+  FaArrowRight,
+  FaBriefcase,
+  FaUserGraduate,
+} from "react-icons/fa";
 
 const JobList = ({ jobs }) => {
+  const { t } = useTranslation();
+
   if (!jobs || jobs.length === 0) {
     return (
       <div className="text-center text-gray-600">
-        <p className="text-lg">Maaf, belum ada lowongan pekerjaan yang tersedia.</p>
+        <p className="text-lg">{t("jobList.noJobs")}</p>
       </div>
     );
   }
@@ -30,7 +39,7 @@ const JobList = ({ jobs }) => {
           {/* Gaji */}
           <div className="flex items-center text-gray-500 text-sm mt-2">
             <FaMoneyBillWave className="mr-2 text-green-500" />
-            <p>{job.salaryRange || "Gaji tidak disebutkan"}</p>
+            <p>{job.salaryRange || t("jobList.salaryNotMentioned")}</p>
           </div>
 
           {/* Jenis Pekerjaan */}
@@ -50,7 +59,7 @@ const JobList = ({ jobs }) => {
             to={`/karir/${job._id}`}
             className="mt-4 inline-flex items-center text-blue-600 font-medium hover:underline"
           >
-            Lihat Detail
+            {t("jobList.viewDetails")}
             <FaArrowRight className="ml-2" />
           </Link>
         </div>

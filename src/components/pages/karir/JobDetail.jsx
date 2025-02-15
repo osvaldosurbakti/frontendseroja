@@ -1,10 +1,21 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { FaMapMarkerAlt, FaMoneyBillWave, FaCheckCircle, FaArrowLeft, FaBriefcase, FaUserGraduate, FaBuilding } from "react-icons/fa";
+import {
+  FaMapMarkerAlt,
+  FaMoneyBillWave,
+  FaCheckCircle,
+  FaArrowLeft,
+  FaBriefcase,
+  FaUserGraduate,
+  FaBuilding,
+} from "react-icons/fa";
 
 const JobDetail = ({ job }) => {
+  const { t } = useTranslation();
+
   if (!job) {
-    return <p className="text-center text-gray-600">Lowongan tidak ditemukan.</p>;
+    return <p className="text-center text-gray-600">{t("jobDetail.notFound")}</p>;
   }
 
   return (
@@ -15,7 +26,7 @@ const JobDetail = ({ job }) => {
           to="/karir"
           className="inline-flex items-center text-blue-600 hover:underline mb-4"
         >
-          <FaArrowLeft className="mr-2" /> Kembali ke Lowongan
+          <FaArrowLeft className="mr-2" /> {t("jobDetail.backToJobs")}
         </Link>
         <h2 className="text-3xl font-extrabold text-gray-800">{job.title}</h2>
       </div>
@@ -30,21 +41,18 @@ const JobDetail = ({ job }) => {
         </p>
         <p className="flex items-center text-gray-600">
           <FaMoneyBillWave className="text-green-500 mr-2" />
-          {job.salaryRange || "Negosiasi"}
+          {job.salaryRange || t("jobDetail.negotiable")}
         </p>
       </div>
 
       {/* Informasi Tambahan */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-        {/* Jenis Pekerjaan */}
         <p className="flex items-center text-gray-600">
           <FaBriefcase className="text-purple-500 mr-2" /> {job.employmentType}
         </p>
-        {/* Tingkat Pengalaman */}
         <p className="flex items-center text-gray-600">
           <FaUserGraduate className="text-orange-500 mr-2" /> {job.experienceLevel}
         </p>
-        {/* Departemen */}
         <p className="flex items-center text-gray-600">
           <FaBuilding className="text-indigo-500 mr-2" /> {job.department}
         </p>
@@ -52,7 +60,7 @@ const JobDetail = ({ job }) => {
 
       {/* Persyaratan Pekerjaan */}
       <div className="mb-6">
-        <h3 className="text-lg font-semibold text-gray-800 mb-2">Persyaratan:</h3>
+        <h3 className="text-lg font-semibold text-gray-800 mb-2">{t("jobDetail.requirements")}</h3>
         <ul className="list-none space-y-2">
           {job.requirements.map((req, index) => (
             <li key={index} className="flex items-center text-gray-700">
@@ -68,7 +76,7 @@ const JobDetail = ({ job }) => {
         to={`/karir/apply/${job._id}`}
         className="block text-center bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300"
       >
-        Lamar Pekerjaan
+        {t("jobDetail.applyNow")}
       </Link>
     </div>
   );

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FaUser, FaEnvelope, FaPhone, FaFileAlt, FaPaperPlane } from "react-icons/fa";
 
 const ApplicationForm = ({ jobId }) => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     applicantName: "",
     email: "",
@@ -39,7 +41,7 @@ const ApplicationForm = ({ jobId }) => {
     console.log("Data Lamaran:", applicationData);
 
     setTimeout(() => {
-      alert("Lamaran berhasil dikirim!");
+      alert(t("application.successMessage"));
       setIsSubmitting(false);
     }, 2000);
   };
@@ -49,7 +51,7 @@ const ApplicationForm = ({ jobId }) => {
       {/* Nama Lengkap */}
       <div>
         <label className="block text-gray-700 font-medium mb-2">
-          Nama Lengkap
+          {t("application.fullName")}
         </label>
         <div className="relative">
           <FaUser className="absolute left-3 top-3 text-gray-400" />
@@ -66,7 +68,9 @@ const ApplicationForm = ({ jobId }) => {
 
       {/* Email */}
       <div>
-        <label className="block text-gray-700 font-medium mb-2">Email</label>
+        <label className="block text-gray-700 font-medium mb-2">
+          {t("application.email")}
+        </label>
         <div className="relative">
           <FaEnvelope className="absolute left-3 top-3 text-gray-400" />
           <input
@@ -83,7 +87,7 @@ const ApplicationForm = ({ jobId }) => {
       {/* Nomor Telepon */}
       <div>
         <label className="block text-gray-700 font-medium mb-2">
-          Nomor Telepon
+          {t("application.phone")}
         </label>
         <div className="relative">
           <FaPhone className="absolute left-3 top-3 text-gray-400" />
@@ -100,7 +104,9 @@ const ApplicationForm = ({ jobId }) => {
 
       {/* Upload Resume */}
       <div>
-        <label className="block text-gray-700 font-medium mb-2">Resume</label>
+        <label className="block text-gray-700 font-medium mb-2">
+          {t("application.resume")}
+        </label>
         <div className="relative">
           <FaFileAlt className="absolute left-3 top-3 text-gray-400" />
           <input
@@ -124,7 +130,7 @@ const ApplicationForm = ({ jobId }) => {
         ) : (
           <FaPaperPlane className="mr-2" />
         )}
-        {isSubmitting ? "Mengirim..." : "Kirim Lamaran"}
+        {isSubmitting ? t("application.sending") : t("application.submit")}
       </button>
     </form>
   );

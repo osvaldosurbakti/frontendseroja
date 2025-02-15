@@ -1,5 +1,4 @@
 {
-
   "header": {
     "about_us": "Tentang Kami",
     "home": "Beranda",
@@ -7,19 +6,96 @@
     "career": "Karir",
     "contact": "Kontak"
   },
-    "footer": {
-      "about_us": "Tentang Kami",
-      "about_description": "Seroja Medan Group adalah perusahaan terkemuka di bidang konstruksi dan desain, berkomitmen untuk memberikan solusi terbaik bagi klien kami.",
-      "quick_links": "Link Cepat",
-      "home": "Beranda",
-      "portfolio": "Portofolio",
-      "career": "Karir",
-      "contact": "Kontak",
-      "email": "Email",
-      "phone": "Telepon",
-      "address": "Alamat",
-      "social_media": "Sosial Media",
-      "copyright": "Hak cipta dilindungi"
-    }
-  }
-  
+
+  "footer": {
+    "about_us": "Tentang Kami",
+    "about_description": "Seroja Medan Group adalah perusahaan terkemuka di bidang konstruksi dan desain, berkomitmen untuk memberikan solusi terbaik bagi klien kami.",
+    "quick_links": "Tautan Cepat",
+    "home": "Beranda",
+    "portfolio": "Portofolio",
+    "career": "Karir",
+    "contact": "Kontak",
+    "email": "Email",
+    "phone": "Telepon",
+    "address": "Alamat",
+    "social_media": "Media Sosial",
+    "copyright": "Hak cipta dilindungi"
+  },
+
+  "careers": {
+    "title": "Bergabunglah dengan Tim Kami",
+    "subtitle": "Kami mencari individu berbakat yang siap berkembang bersama kami. Temukan posisi yang sesuai dengan keahlian dan minat Anda.",
+    "searchPlaceholder": "Cari posisi...",
+    "allLocations": "Semua Lokasi",
+    "locations": {
+      "jakarta": "Jakarta",
+      "bandung": "Bandung",
+      "medan": "Medan"
+    },
+    "reset": "Atur Ulang Filter",
+    "results": "Menampilkan {{count}} lowongan pekerjaan tersedia",
+    "noResults": "Tidak ada lowongan yang cocok dengan pencarian Anda."
+  },
+
+  "jobDetail": {
+    "notFound": "Lowongan tidak ditemukan.",
+    "backToJobs": "Kembali ke Daftar Lowongan",
+    "negotiable": "Dapat dinegosiasikan",
+    "requirements": "Persyaratan",
+    "applyNow": "Lamar Pekerjaan"
+  },
+
+  "jobList": {
+    "noJobs": "Maaf, belum ada lowongan pekerjaan yang tersedia.",
+    "salaryNotMentioned": "Gaji tidak disebutkan",
+    "viewDetails": "Lihat Detail"
+  },
+
+  "applyJob": {
+    "notFound": "Pekerjaan tidak ditemukan.",
+    "backToJobs": "Kembali ke Daftar Lowongan",
+    "location": "Lokasi",
+    "salary": "Gaji",
+    "jobType": "Jenis Pekerjaan",
+    "experience": "Tingkat Pengalaman",
+    "department": "Departemen"
+  },
+
+  "application": {
+    "fullName": "Nama Lengkap",
+    "email": "Email",
+    "phone": "Nomor Telepon",
+    "resume": "Resume",
+    "submit": "Kirim Lamaran",
+    "sending": "Mengirim...",
+    "successMessage": "Lamaran berhasil dikirim!"
+  },
+
+  "contactUs": {
+    "title": "Hubungi Kami",
+    "description": "Kami siap membantu! Jangan ragu untuk menghubungi kami."
+  },
+
+  "contact": {
+    "title": "Hubungi Kami",
+    "email": "Email",
+    "phone": "Telepon",
+    "hours": "Jam Operasional",
+    "weekdays": "Senin - Jumat: 08:00 - 17:00 WIB",
+    "saturday": "Sabtu: 08:00 - 12:00 WIB",
+    "sunday": "Minggu & Hari Libur: Tutup",
+    "whatsapp": "Hubungi via WhatsApp"
+  },
+  "location": {
+    "title": "Lokasi Kami",
+    "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31693.600000000007!2d98.6659279!3d3.5951955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x303131f2c72a3ed9%3A0x47d4c4fbee88888!2sSeroja%20Medan%20Group!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
+  },
+  "faq": {
+  "title": "Pertanyaan Umum (FAQ)",
+  "items": [
+    { "question": "Bagaimana cara menghubungi customer service?", "answer": "Anda bisa menghubungi kami melalui WhatsApp atau email." },
+    { "question": "Berapa lama waktu respon dari tim kami?", "answer": "Biasanya kami akan merespons dalam waktu 24 jam pada hari kerja." },
+    { "question": "Apakah tersedia layanan konsultasi?", "answer": "Ya, kami menyediakan layanan konsultasi. Silakan hubungi kami untuk informasi lebih lanjut." }
+  ]
+}
+}
