@@ -2,21 +2,29 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/navigation";
 import portfolioItems from "../../../data/dummyPortofolio";
 
-const PortfolioList = ({ category }) => {
+const PortfolioList = ({ category, searchQuery }) => {
   const [loading, setLoading] = useState(true);
-
-  const filteredPortfolios = portfolioItems.filter(
-    (item) => item.status === "active" && item.category === category
-  );
+  const [filteredPortfolios, setFilteredPortfolios] = useState([]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1000);
+    setLoading(true);
+    const timer = setTimeout(() => {
+      const result = portfolioItems.filter(
+        (item) =>
+          item.status === "active" &&
+          item.category === category &&
+          item.title.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredPortfolios(result);
+      setLoading(false);
+    }, 500); // Mengurangi waktu loading agar lebih responsif
     return () => clearTimeout(timer);
-  }, []);
+  }, [category, searchQuery]);
 
   if (loading) {
     return (
@@ -26,11 +34,16 @@ const PortfolioList = ({ category }) => {
     );
   }
 
-  if (!filteredPortfolios.length) {
+  if (filteredPortfolios.length === 0) {
     return (
-      <p className="text-center text-gray-500 italic">
-        Tidak ada portofolio tersedia untuk kategori ini.
-      </p>
+      <motion.p
+        className="text-center text-gray-500 italic"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        Tidak ada portofolio ditemukan untuk kategori ini.
+      </motion.p>
     );
   }
 
@@ -44,7 +57,12 @@ const PortfolioList = ({ category }) => {
     >
       {filteredPortfolios.map((item) => (
         <SwiperSlide key={item._id}>
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-transform duration-300 transform hover:-translate-y-2">
+          <motion.div
+            className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-transform duration-300 transform hover:-translate-y-2"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             <div className="relative h-48 overflow-hidden">
               <img
                 src={item.imageUrl}
@@ -67,7 +85,7 @@ const PortfolioList = ({ category }) => {
                 Lihat Detail
               </Link>
             </div>
-          </div>
+          </motion.div>
         </SwiperSlide>
       ))}
     </Swiper>

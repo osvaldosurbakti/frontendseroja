@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import portfolioItems from "../../../data/dummyPortofolio"; // Impor data dummy
+import { motion } from "framer-motion";
+import portfolioItems from "../../../data/dummyPortofolio";
 
 const PortfolioDetail = ({ id }) => {
   const item = portfolioItems.find((item) => item._id === id);
@@ -9,16 +10,21 @@ const PortfolioDetail = ({ id }) => {
     return <p className="text-center text-gray-600">Portofolio tidak ditemukan.</p>;
   }
 
-  // URL WhatsApp (opsional untuk kategori tertentu)
   const whatsappNumber = "628123456789"; // Ganti dengan nomor perusahaan
   const whatsappMessage = encodeURIComponent(`Halo, saya tertarik dengan portofolio ${item.title}.`);
 
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="bg-white shadow-lg rounded-lg overflow-hidden"
+    >
       <img
         src={item.imageUrl}
         alt={item.title}
         className="w-full h-64 object-cover"
+        loading="lazy"
       />
       <div className="p-6">
         <h2 className="text-2xl font-bold mb-4">{item.title}</h2>
@@ -51,7 +57,7 @@ const PortfolioDetail = ({ id }) => {
           Kembali ke Daftar {item.category}
         </Link>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

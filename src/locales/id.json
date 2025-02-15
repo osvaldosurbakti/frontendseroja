@@ -97,5 +97,25 @@
     { "question": "Berapa lama waktu respon dari tim kami?", "answer": "Biasanya kami akan merespons dalam waktu 24 jam pada hari kerja." },
     { "question": "Apakah tersedia layanan konsultasi?", "answer": "Ya, kami menyediakan layanan konsultasi. Silakan hubungi kami untuk informasi lebih lanjut." }
   ]
-}
+},
+
+  "porfolio": {
+    "title": "Daftar Portofolio",
+    "categoryPlaceholder": "Semua Kategori",
+    "searchPlaceholder": "Cari portofolio...",
+    "clientTestimonials": "Apa Kata Klien Kami?",
+    "aboutUs": "Tentang Kami",
+    "categories": [
+      "Konstruksi Gedung",
+      "Konstruksi Sipil",
+      "Desain Interior dan Eksterior",
+      "Marmer"
+    ],
+    "testimonials": [
+      { "text": "Perusahaan ini sangat profesional dalam pengerjaan proyek kami! Sangat direkomendasikan.", "name": "Budi Santoso, PT ABC" },
+      { "text": "Tim yang sangat handal dan memiliki hasil yang luar biasa.", "name": "Siti Aminah, CV Maju Jaya" },
+      { "text": "Kualitas terbaik dengan harga yang bersaing!", "name": "Rudi Hartono, PT Makmur Sejahtera" }
+    ]
+  }
+
 }

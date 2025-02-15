@@ -98,5 +98,24 @@
   "location": {
     "title": "Our Location",
     "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31693.600000000007!2d98.6659279!3d3.5951955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x303131f2c72a3ed9%3A0x47d4c4fbee88888!2sSeroja%20Medan%20Group!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
-  }
+  },
+"portfolio":{
+  "title": "Portfolio List",
+  "categoryPlaceholder": "All Categories",
+  "searchPlaceholder": "Search portfolio...",
+  "clientTestimonials": "What Our Clients Say?",
+  "aboutUs": "About Us",
+  "categories": [
+    "Building Construction",
+    "Civil Construction",
+    "Interior and Exterior Design",
+    "Marble"
+  ],
+  "testimonials": [
+    { "text": "This company is very professional in handling our project! Highly recommended.", "name": "Budi Santoso, PT ABC" },
+    { "text": "A very skilled team with outstanding results.", "name": "Siti Aminah, CV Maju Jaya" },
+    { "text": "Top quality with competitive prices!", "name": "Rudi Hartono, PT Makmur Sejahtera" }
+  ]
+
+}
 }
