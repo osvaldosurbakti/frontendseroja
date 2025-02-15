@@ -1,21 +1,20 @@
 import React from "react";
+import { FaWhatsapp } from "react-icons/fa";
 
 const WhatsAppButton = () => {
-  const phoneNumber = "628123456789"; // Nomor WhatsApp (tanpa tanda +)
-  const message = "Halo, saya ingin bertanya lebih lanjut.";
-
-  const handleWhatsAppClick = () => {
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    window.open(url, "_blank");
-  };
+  const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "6281234567890";
+  const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
   return (
-    <button
-      onClick={handleWhatsAppClick}
-      className="bg-green-500 text-white py-2 px-6 rounded-md hover:bg-green-600 transition"
+    <a
+      href={whatsappLink}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center px-6 py-3 text-white bg-green-500 rounded-lg shadow-lg hover:bg-green-600 transition duration-300"
     >
+      <FaWhatsapp className="text-2xl mr-2" />
       Hubungi via WhatsApp
-    </button>
+    </a>
   );
 };
 

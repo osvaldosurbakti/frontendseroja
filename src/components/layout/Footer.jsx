@@ -1,9 +1,10 @@
 import React from "react";
-import { useTranslation } from "react-i18next"; // Import hook useTranslation
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
-  const { t } = useTranslation(); // Inisialisasi translasi
+  const { t } = useTranslation();
 
   return (
     <footer className="bg-gray-900 text-white py-12">
@@ -12,9 +13,7 @@ const Footer = () => {
           {/* Tentang Kami */}
           <div>
             <h3 className="text-xl font-bold mb-4">{t("footer.about_us")}</h3>
-            <p className="text-gray-400">
-              {t("footer.about_description")}
-            </p>
+            <p className="text-gray-400">{t("footer.about_description")}</p>
           </div>
 
           {/* Link Cepat */}
@@ -22,24 +21,29 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">{t("footer.quick_links")}</h3>
             <ul className="space-y-2">
               <li>
-                <a href="/" className="text-gray-400 hover:text-blue-500 transition duration-300">
+                <Link to="/" className="text-gray-400 hover:text-blue-500 transition duration-300">
                   {t("footer.home")}
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/tentang-kami" className="text-gray-400 hover:text-blue-500 transition duration-300">
+                <Link to="/tentang-kami" className="text-gray-400 hover:text-blue-500 transition duration-300">
                   {t("footer.about_us")}
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/portofolio" className="text-gray-400 hover:text-blue-500 transition duration-300">
+                <Link to="/portofolio" className="text-gray-400 hover:text-blue-500 transition duration-300">
                   {t("footer.portfolio")}
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/karir" className="text-gray-400 hover:text-blue-500 transition duration-300">
+                <Link to="/karir" className="text-gray-400 hover:text-blue-500 transition duration-300">
                   {t("footer.career")}
-                </a>
+                </Link>
+              </li>
+              <li>
+                <Link to="/hubungi-kami" className="text-gray-400 hover:text-blue-500 transition duration-300">
+                  {t("footer.contact")}
+                </Link>
               </li>
             </ul>
           </div>
@@ -48,9 +52,9 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4">{t("footer.contact")}</h3>
             <ul className="text-gray-400 space-y-2">
-              <li>{t("footer.email")}: info@serojamedan.com</li>
-              <li>{t("footer.phone")}: +62 123 4567 890</li>
-              <li>{t("footer.address")}: Jl. Contoh No. 123, Medan, Indonesia</li>
+              <li>{t("footer.email")}: info@serojamedangroup.com</li>
+              <li>{t("footer.phone")}: (061) 42569658</li>
+              <li>{t("footer.address")}: Komplek Seroja Residence A3, Jl. Seroja, Sunggal, Kec. Medan Sunggal, Kota Medan, Sumatera Utara 20128</li>
             </ul>
           </div>
 

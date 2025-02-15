@@ -1,0 +1,46 @@
+const teamMembers = [
+  {
+    id: 1,
+    name: "John Doe",
+    position: "Direktur Utama",
+    type: "direksi",
+    image: "https://source.unsplash.com/200x200/?business,man",
+  },
+  {
+    id: 2,
+    name: "Jane Smith",
+    position: "Komisaris",
+    type: "komisaris",
+    image: "https://source.unsplash.com/200x200/?business,woman",
+  },
+  {
+    id: 3,
+    name: "Robert Brown",
+    position: "Manajer Operasional",
+    type: "direksi",
+    image: "https://source.unsplash.com/200x200/?corporate,man",
+  },
+  {
+    id: 4,
+    name: "Emily Johnson",
+    position: "Komisaris Independen",
+    type: "komisaris",
+    image: "https://source.unsplash.com/200x200/?corporate,woman",
+  },
+  {
+    id: 5,
+    name: "Michael Scott",
+    position: "CEO",
+    type: "direksi",
+    image: "https://source.unsplash.com/200x200/?executive,man",
+  },
+  {
+    id: 6,
+    name: "Pam Beesly",
+    position: "Sekretaris Perusahaan",
+    type: "komisaris",
+    image: "https://source.unsplash.com/200x200/?executive,woman",
+  },
+];
+
+export default teamMembers;

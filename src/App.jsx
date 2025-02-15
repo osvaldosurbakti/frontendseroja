@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ScrollToTop from "./components/layout/ScrollToTop"; // Import komponen
 import { useAuth } from "./context/AuthContext";
 import Navbar from "./components/layout/Navbar";
 import Sidebar from "./components/layout/Sidebar";
@@ -17,6 +18,7 @@ const App = () => {
 
   return (
     <Router>
+            <ScrollToTop /> {/* Tambahkan di sini */}
       <div className="flex flex-col min-h-screen">
         <Navbar />
         <div className="flex flex-1 overflow-hidden">
