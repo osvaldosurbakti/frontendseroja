@@ -81,6 +81,14 @@ const Navbar = () => {
               <span>{language === "id" ? "EN" : "ID"}</span>
             </button>
           </li>
+          <li className="transform hover:scale-105 transition-transform duration-300">
+            <Link
+              to="/login"
+              className="bg-white text-blue-700 px-5 py-2 rounded-lg shadow-md hover:bg-gray-100 hover:shadow-lg transition duration-300 font-semibold flex items-center space-x-2"
+            >
+              <span>Login</span>
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>

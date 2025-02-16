@@ -1,31 +1,26 @@
-// src/pages/tentangKami/index.js
-
 import React from "react";
-import CompanyProfile from "../../components/pages/tentangKami/CompanyProfile.jsx";
-import VisionMission from "../../components/pages/tentangKami/VisionMission.jsx";
-import TeamList from "../../components/pages/tentangKami/TeamList.jsx";
-
+import CompanyProfile from "../../components/pages/tentangKami/CompanyProfile";
+import VisionMission from "../../components/pages/tentangKami/VisionMission";
+import TeamList from "../../components/pages/tentangKami/TeamList";
+import VideoSection from "../../components/ui/VideoSection";
+import CTASection from "../../components/pages/tentangKami/CTASection";
+import CompanyStats from "../../components/pages/tentangKami/CompanyStats";
+import WhyChooseUs from "../../components/pages/tentangKami/WhyChooseUs";
 
 const TentangKami = () => {
   return (
-    <section className="py-16">
-      <div className="container mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-10">Tentang Kami</h1>
-
-        {/* Company Profile Section */}
-        <div className="mb-10">
-          <CompanyProfile />
-        </div>
-
-        {/* Vision and Mission Section */}
-        <div className="mb-10">
-          <VisionMission />
-        </div>
-
-        {/* Team List Section */}
-        <div>
-          <TeamList />
-        </div>
+    <section className="py-20 bg-gray-50">
+      <div className="container mx-auto px-6">
+        <h1 className="text-5xl font-extrabold text-center text-blue-700 mb-12">
+          Tentang Kami
+        </h1>
+        <CompanyProfile />
+        <VisionMission />
+        <TeamList />
+        <CompanyStats />
+        <WhyChooseUs />
+        <VideoSection videoUrl="https://www.youtube-nocookie.com/embed/WDI4luNyBkQ" title="Profil Perusahaan" />
+        <CTASection />
       </div>
     </section>
   );

@@ -1,12 +1,14 @@
+import { motion } from "framer-motion";
 import React from "react";
 
-const Card = ({ children, title }) => {
-  return (
-    <div className="border rounded-lg shadow-md p-4 bg-white">
-      {title && <h3 className="text-lg font-bold mb-2">{title}</h3>}
-      <div>{children}</div>
-    </div>
-  );
-};
+export const Card = ({ children, className }) => (
+  <motion.div
+    whileHover={{ scale: 1.02, boxShadow: "0px 10px 20px rgba(0,0,0,0.1)" }}
+    whileTap={{ scale: 0.98 }}
+    className={`border rounded-2xl shadow-md p-4 bg-white transition ${className}`}
+  >
+    {children}
+  </motion.div>
+);
 
-export default Card;
+export const CardContent = ({ children }) => <div className="p-2">{children}</div>;

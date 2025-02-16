@@ -7,7 +7,7 @@ import CategoryFilter from "../../components/pages/portfolio/CategoryFilter";
 import SearchBar from "../../components/pages/portfolio/SearchBar";
 import PortfolioCategory from "../../components/pages/portfolio/PortfolioCategory";
 import Testimonial from "../../components/pages/portfolio/Testimonial";
-import VideoSection from "../../components/pages/portfolio/VideoSection";
+import VideoSection from "../../components/ui/VideoSection";
 import { useRef } from "react";
 
 
@@ -70,7 +70,7 @@ if (!testimonials?.length) return <div>{t("portfolio.no_testimonials")}</div>;
             <PortfolioCategory key={category.id} category={category.id} searchQuery={searchQuery} />
           ))}
 
-        <VideoSection videoUrl="https://www.youtube.com/embed/WDI4luNyBkQ?si=MFqSwG4ForZB8Thf" />
+<VideoSection videoUrl="https://www.youtube.com/embed/WDI4luNyBkQ?enablejsapi=1&modestbranding=1&rel=0" />
 
         <Testimonial />
       </div>
