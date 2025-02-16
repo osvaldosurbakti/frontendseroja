@@ -5,7 +5,6 @@ import JobFilters from "../../components/pages/admin/JobFilters";
 import JobTable from "../../components/pages/admin/JobTable";
 import Pagination from "../../components/pages/admin/Pagination";
 import Notification, { NotificationType } from "../../components/ui/Notification";
-import JobFormModal from "./JobFormModal"; // Import modal tambah lowongan
 
 const JobManagement = () => {
   const [jobs, setJobs] = useState(dummyJobs);
@@ -52,6 +51,7 @@ const JobManagement = () => {
 
   return (
     <div className="container mx-auto p-6">
+    <div>" "</div>
       {notification && <Notification type={notification.type} message={notification.message} />}
       <h1 className="text-4xl font-extrabold text-center mb-8 text-gray-800">Manajemen Lowongan Pekerjaan</h1>
       
