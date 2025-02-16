@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaCircle } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
@@ -9,7 +9,6 @@ const Navbar = () => {
   const { t, i18n } = useTranslation();
   const [language, setLanguage] = useState(i18n.language);
 
-  // Check if the current route is active
   const isActive = (path) => location.pathname === path;
 
   const changeLanguage = (lng) => {
@@ -17,94 +16,69 @@ const Navbar = () => {
     setLanguage(lng);
   };
 
-  return (
-    <nav className="bg-gradient-to-r from-blue-500 to-blue-700 text-white shadow-md fixed w-full z-50">
-      <div className="container mx-auto flex justify-between items-center py-3 px-6 md:px-10">
-        {/* Logo */}
-        <div className="text-2xl font-extrabold tracking-wide flex items-center">
-          <Link to="/" className="hover:text-gray-200 flex items-center transition duration-300">
-            <img
-              src="src/assets/images/logo.png" // Ganti dengan path logo Anda
-              alt="Seroja Medan Group Logo"
-              className="h-10 w-10 mr-2 rounded-lg shadow-md"
-            />
-            Seroja Medan Group
-          </Link>
-        </div>
+  // Map paths to translation keys
+  const pathToKeyMap = {
+    "/": "home",
+    "/tentang-kami": "about_us",
+    "/portofolio": "portfolio",
+    "/karir": "career",
+    "/hubungi-kami": "contact",
+  };
 
-        {/* Burger Menu (Mobile) */}
+  return (
+    <nav className="bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white shadow-sm fixed w-full z-50 backdrop-blur-md bg-opacity-90">
+      <div className="container mx-auto flex justify-between items-center py-4 px-6 md:px-12">
+        {/* Logo */}
+        <Link to="/" className="flex items-center space-x-3 text-2xl font-bold hover:opacity-80 transition duration-300">
+          <img
+            src="src/assets/images/logo.png"
+            alt="Seroja Medan Group Logo"
+            className="h-12 w-12 rounded-lg shadow-md transform hover:scale-110 transition-transform duration-300"
+          />
+          <span className="hidden md:block text-xl font-semibold">Seroja Medan Group</span>
+        </Link>
+
+        {/* Mobile Menu Button */}
         <button
-          className="block md:hidden text-white focus:outline-none focus:ring-2 focus:ring-white rounded-md"
+          className="md:hidden text-white focus:outline-none transform hover:scale-110 transition-transform duration-300"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          {isMenuOpen ? (
-            <FaTimes size={24} className="hover:text-gray-300 transition duration-300" />
-          ) : (
-            <FaBars size={24} className="hover:text-gray-300 transition duration-300" />
-          )}
+          {isMenuOpen ? <FaTimes size={26} /> : <FaBars size={26} />}
         </button>
 
         {/* Navigation Links */}
         <ul
-          className={`md:flex space-y-4 md:space-y-0 md:space-x-8 items-center md:static absolute left-0 top-full w-full md:w-auto bg-blue-600 md:bg-transparent transition-all duration-300 ease-in-out ${
-            isMenuOpen ? "block p-4 shadow-lg" : "hidden"
+          className={`absolute md:relative left-0 top-full md:top-0 w-full md:w-auto bg-blue-700 md:bg-transparent md:flex space-y-4 md:space-y-0 md:space-x-6 text-lg text-center md:text-left transition-all duration-300 ease-in-out ${
+            isMenuOpen ? "block p-5 shadow-lg backdrop-blur-md bg-opacity-90" : "hidden md:flex"
           }`}
         >
-          <li className="text-center">
-            <Link
-              to="/"
-              className={`text-lg px-3 py-2 rounded-md transition duration-300 ${
-                isActive("/") ? "bg-blue-700 font-bold" : "hover:bg-blue-700"
-              }`}
-            >
-              {t("header.home")}
-            </Link>
-          </li>
-          <li className="text-center">
-            <Link
-              to="/tentang-kami"
-              className={`text-lg px-3 py-2 rounded-md transition duration-300 ${
-                isActive("/tentang-kami") ? "bg-blue-700 font-bold" : "hover:bg-blue-700"
-              }`}
-            >
-              {t("header.about_us")}
-            </Link>
-          </li>
-          <li className="text-center">
-            <Link
-              to="/portofolio"
-              className={`text-lg px-3 py-2 rounded-md transition duration-300 ${
-                isActive("/portofolio") ? "bg-blue-700 font-bold" : "hover:bg-blue-700"
-              }`}
-            >
-              {t("header.portfolio")}
-            </Link>
-          </li>
-          <li className="text-center">
-            <Link
-              to="/karir"
-              className={`text-lg px-3 py-2 rounded-md transition duration-300 ${
-                isActive("/karir") ? "bg-blue-700 font-bold" : "hover:bg-blue-700"
-              }`}
-            >
-              {t("header.career")}
-            </Link>
-          </li>
-          {/* CTA Button */}
-          <li className="text-center">
+          {["/", "/tentang-kami", "/portofolio", "/karir"].map((path, index) => (
+            <li key={index} className="transform hover:scale-105 transition-transform duration-300">
+              <Link
+                to={path}
+                className={`px-4 py-2 rounded-lg transition duration-300 flex items-center space-x-2 ${
+                  isActive(path) ? "bg-blue-900 font-bold shadow-inner" : "hover:bg-blue-800 hover:shadow-md"
+                }`}
+              >
+                {isActive(path) && <FaCircle className="text-white text-xs" />}
+                <span>{t(`header.${pathToKeyMap[path]}`)}</span>
+              </Link>
+            </li>
+          ))}
+          <li className="transform hover:scale-105 transition-transform duration-300">
             <Link
               to="/hubungi-kami"
-              className="bg-white text-blue-600 px-5 py-2 rounded-lg shadow-md hover:bg-gray-100 transition duration-300 font-semibold"
+              className="bg-white text-blue-700 px-5 py-2 rounded-lg shadow-md hover:bg-gray-100 hover:shadow-lg transition duration-300 font-semibold flex items-center space-x-2"
             >
-              {t("header.contact")}
+              <span>{t("header.contact")}</span>
             </Link>
           </li>
-          <li className="text-center">
+          <li className="transform hover:scale-105 transition-transform duration-300">
             <button
               onClick={() => changeLanguage(language === "id" ? "en" : "id")}
-              className="bg-white text-blue-600 px-3 py-2 rounded-md shadow-md hover:bg-gray-100 transition duration-300 font-semibold"
+              className="bg-white text-blue-700 px-3 py-2 rounded-md shadow-md hover:bg-gray-100 hover:shadow-lg transition duration-300 font-semibold flex items-center space-x-2"
             >
-              {language === "id" ? "EN" : "ID"}
+              <span>{language === "id" ? "EN" : "ID"}</span>
             </button>
           </li>
         </ul>

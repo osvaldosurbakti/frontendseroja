@@ -1,12 +1,12 @@
 {
-  "header": {
-    "about_us": "Tentang Kami",
-    "home": "Beranda",
-    "portfolio": "Portofolio",
-    "career": "Karir",
-    "contact": "Kontak"
+  
+    "header": {
+      "home": "Beranda",
+      "about_us": "Tentang Kami",
+      "portfolio": "Portofolio",
+      "career": "Karir",
+      "contact": "Kontak"
   },
-
   "footer": {
     "about_us": "Tentang Kami",
     "about_description": "Seroja Medan Group adalah perusahaan terkemuka di bidang konstruksi dan desain, berkomitmen untuk memberikan solusi terbaik bagi klien kami.",
@@ -99,23 +99,41 @@
   ]
 },
 
-  "porfolio": {
+  "portfolio": {
     "title": "Daftar Portofolio",
-    "categoryPlaceholder": "Semua Kategori",
-    "searchPlaceholder": "Cari portofolio...",
-    "clientTestimonials": "Apa Kata Klien Kami?",
-    "aboutUs": "Tentang Kami",
-    "categories": [
-      "Konstruksi Gedung",
-      "Konstruksi Sipil",
-      "Desain Interior dan Eksterior",
-      "Marmer"
-    ],
-    "testimonials": [
-      { "text": "Perusahaan ini sangat profesional dalam pengerjaan proyek kami! Sangat direkomendasikan.", "name": "Budi Santoso, PT ABC" },
-      { "text": "Tim yang sangat handal dan memiliki hasil yang luar biasa.", "name": "Siti Aminah, CV Maju Jaya" },
-      { "text": "Kualitas terbaik dengan harga yang bersaing!", "name": "Rudi Hartono, PT Makmur Sejahtera" }
-    ]
+    "categories": {
+      "building_construction": "Konstruksi Gedung",
+      "civil_construction": "Konstruksi Sipil",
+      "interior_exterior_design": "Desain Interior dan Eksterior",
+      "marble": "Marmer"
+    },
+    "no_categories": "Tidak ada kategori yang tersedia.",
+    "no_testimonials": "Tidak ada testimonial yang tersedia.",
+    "video_title": "Video Tentang Kami",
+     "no_results": "Tidak ada hasil ditemukan untuk kategori ini.",
+    "view_details": "Lihat Detail",
+    "all_categories": "Semua Kategori",
+    "loading": "Memuat portofolio...",
+    "detailTitle": "Detail Portofolio",
+    "notFound": "Portofolio tidak ditemukan.",
+    "category": "Kategori",
+    "created": "Dibuat",
+    "updated": "Diperbarui",
+    "contactViaWhatsApp": "Hubungi Kami via WhatsApp",
+    "whatsappMessage": "Halo, saya tertarik dengan portofolio {{title}}.",
+    "backToCategory": "Kembali ke Daftar {{category}}",
+    "placeholder": "Cari portofolio..."
+    
+  },
+  "testimonial": {
+    "title": "Apa Kata Klien Kami?"
+  },
+  "videoSection": {
+    "title": "Video Tentang Kami",
+    "videoTitle": "Video Portofolio"
+  },
+  "search": {
+    "placeholder": "Cari..."
   }
 
 }

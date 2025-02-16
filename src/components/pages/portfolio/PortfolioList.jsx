@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import "swiper/css";
 import "swiper/css/navigation";
 import portfolioItems from "../../../data/dummyPortofolio";
 
 const PortfolioList = ({ category, searchQuery }) => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [filteredPortfolios, setFilteredPortfolios] = useState([]);
 
@@ -17,14 +19,14 @@ const PortfolioList = ({ category, searchQuery }) => {
       const result = portfolioItems.filter(
         (item) =>
           item.status === "active" &&
-          item.category === category &&
+          item.category.id === category.id &&
           item.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredPortfolios(result);
       setLoading(false);
     }, 500); // Mengurangi waktu loading agar lebih responsif
     return () => clearTimeout(timer);
-  }, [category, searchQuery]);
+  }, [category.id, searchQuery]);
 
   if (loading) {
     return (
@@ -42,7 +44,7 @@ const PortfolioList = ({ category, searchQuery }) => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        Tidak ada portofolio ditemukan untuk kategori ini.
+        {t("portfolio.no_results")}
       </motion.p>
     );
   }
@@ -82,7 +84,7 @@ const PortfolioList = ({ category, searchQuery }) => {
                 to={`/portofolio/${item._id}`}
                 className="inline-block w-full text-center text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md font-medium transition-colors duration-300"
               >
-                Lihat Detail
+                {t("portfolio.view_details")}
               </Link>
             </div>
           </motion.div>
