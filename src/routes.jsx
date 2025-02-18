@@ -15,13 +15,18 @@ import Login from "./pages/login";
 
 // Admin pages
 import AdminDashboard from "./pages/admin";
-import PortfolioManagement from "./pages/admin/portfolio/portofolio";
-import JobManagement from "./pages/admin/jobs";
+import PortfolioManagement from "./pages/admin/portfolio/";
 import WhatsappSettings from "./pages/admin/whatsapp";
 import Statistics from "./pages/admin/statistics";
 import Applicants from "./pages/admin/applicants/applicants";
 import ApplicantDetail from "./pages/admin/applicants/[id]";
+import JobManagement from "./pages/admin/jobs";
 import AddJob from "./pages/admin/jobs/add";
+import EditJob from "./pages/admin/jobs/edit"; // Tambahkan impor untuk EditJob
+import PortfolioList from "./pages/admin/portfolio/index";
+import PortfolioDetail from "./pages/admin/portfolio/[id]";
+import AddPortfolio from "./pages/admin/portfolio/add";
+import EditPortfolio from "./pages/admin/portfolio/edit";
 
 // Superadmin pages
 import SuperadminDashboard from "./pages/superadmin";
@@ -40,7 +45,6 @@ export const routes = (userRole) => [
   { path: "/karir/apply/:id", element: <ApplicationForm /> },
   { path: "/login", element: <Login /> },
 
-  
   // Admin routes
   {
     path: "/admin",
@@ -51,26 +55,10 @@ export const routes = (userRole) => [
     ),
   },
   {
-    path: "/admin/portofolio",
+    path: "/admin/statistics",
     element: (
       <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
-        <PortfolioManagement />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/admin/jobs",
-    element: (
-      <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
-        <JobManagement />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/admin/addjob",
-    element: (
-      <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
-        <AddJob />
+        <Statistics />
       </ProtectedRoute>
     ),
   },
@@ -79,14 +67,6 @@ export const routes = (userRole) => [
     element: (
       <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
         <WhatsappSettings />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/admin/statistics",
-    element: (
-      <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
-        <Statistics />
       </ProtectedRoute>
     ),
   },
@@ -103,6 +83,78 @@ export const routes = (userRole) => [
     element: (
       <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
         <ApplicantDetail />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin/jobs",
+    element: (
+      <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
+        <JobManagement />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin/jobs/:id",
+    element: (
+      <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
+        <JobDetail />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin/jobs/add",
+    element: (
+      <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
+        <AddJob />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin/jobs/edit/:id",
+    element: (
+      <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
+        <EditJob />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin/portfolio",
+    element: (
+      <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
+        <PortfolioList />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin/portfolio/:id",
+    element: (
+      <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
+        <PortfolioDetail />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin/portfolio/add",
+    element: (
+      <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
+        <AddPortfolio />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin/portfolio/edit/:id",
+    element: (
+      <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
+        <EditPortfolio />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin/portofolio",
+    element: (
+      <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
+        <PortfolioManagement />
       </ProtectedRoute>
     ),
   },
@@ -132,5 +184,4 @@ export const routes = (userRole) => [
       </ProtectedRoute>
     ),
   },
-  
 ];

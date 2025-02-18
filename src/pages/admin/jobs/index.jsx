@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import dummyJobs from "../../data/dummyJobs";
-import dummyApplicants from "../../data/dummyApplicants";
+import dummyJobs from "../../../data/dummyJobs";
+import dummyApplicants from "../../../data/dummyApplicants";
 import JobFilters from "../../../components/pages/admin/JobFilters";
 import JobTable from "../../../components/pages/admin/JobTable";
 import Pagination from "../../../components/pages/admin/Pagination";

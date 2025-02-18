@@ -1,6 +1,6 @@
   import React, { useState } from "react";
   import { Link } from "react-router-dom";
-  import dummyApplicants from "../../data/dummyApplicants";
+  import dummyApplicants from "../../../data/dummyApplicants";
 
   const Applicants = () => {
     const [applicants, setApplicants] = useState(dummyApplicants);

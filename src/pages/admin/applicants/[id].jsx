@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import dummyApplicants from "../../data/dummyApplicants";
+import dummyApplicants from "../../../data/dummyApplicants";
 
 const ApplicantDetail = () => {
   const { id } = useParams();

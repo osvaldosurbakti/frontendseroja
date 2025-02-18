@@ -18,13 +18,13 @@ const App = () => {
 
   return (
     <Router>
-            <ScrollToTop /> {/* Tambahkan di sini */}
+      <ScrollToTop /> {/* Tambahkan di sini */}
       <div className="flex flex-col min-h-screen">
         <Navbar />
-        <div className="flex flex-1 overflow-hidden">
+        <div className="flex flex-1 overflow-hidden pt-16"> {/* Tambahkan padding-top untuk memberi ruang pada navbar */}
           {userRole && (userRole === "admin" || userRole === "superadmin") && (
             <aside
-              className={`bg-gray-800 text-white p-4 z-40 transition-all duration-300 ${
+              className={`bg-gray-800 text-white p-4 z-40 transition-all duration-300 fixed top-16 left-0 ${
                 isSidebarOpen ? "w-64" : "w-16"
               }`}
             >
@@ -36,7 +36,7 @@ const App = () => {
             </aside>
           )}
 
-          <main className="flex-1 bg-gray-100 p-6">
+          <main className="flex-1 bg-gray-100 p-6 ml-16 sm:ml-64"> {/* Mengatur margin-left untuk memberi ruang saat sidebar terbuka */}
             <Routes>
               {routes(userRole).map(({ path, element }, index) => (
                 <Route key={index} path={path} element={element} />
@@ -51,5 +51,6 @@ const App = () => {
     </Router>
   );
 };
+
 
 export default App;
