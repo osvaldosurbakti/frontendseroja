@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Button } from "../../ui/Button";
+import React from "react";
+import { Link } from "react-router-dom";
 
-const JobFilters = ({ search, setSearch, filterStatus, setFilterStatus, onAddJob }) => {
+const JobFilters = ({ search, setSearch, filterStatus, setFilterStatus }) => {
   return (
-    <div className="flex justify-between mb-4">
+    <div className="flex justify-between items-center mb-4">
       <input
         type="text"
         placeholder="Cari lowongan..."
@@ -20,12 +20,10 @@ const JobFilters = ({ search, setSearch, filterStatus, setFilterStatus, onAddJob
         <option value="open">Dibuka</option>
         <option value="closed">Ditutup</option>
       </select>
-      <Button 
-        className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg"
-        onClick={onAddJob} // Panggil fungsi untuk membuka modal
-      >
-        + Tambah Lowongan
-      </Button>
+      
+      <Link to="/admin/addjob" className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
+        Tambah Pekerjaan
+      </Link>
     </div>
   );
 };

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import portfolioItems from "../../data/dummyPortofolio";
-import { Card, CardContent } from "../../components/ui/Card";
-import { Input } from "../../components/ui/Input";
-import { Modal } from "../../components/ui/Modal";
-import { Button } from "../../components/ui/Button";
+import { Card, CardContent } from "../../../components/ui/Card";
+import { Input } from "../../../components/ui/Input";
+import { Modal } from "../../../components/ui/Modal";
+import { Button } from "../../../components/ui/Button";
 
 const PortfolioManagement = () => {
   const [portfolios, setPortfolios] = useState(portfolioItems);

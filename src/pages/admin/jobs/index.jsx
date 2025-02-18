@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import dummyJobs from "../../data/dummyJobs";
 import dummyApplicants from "../../data/dummyApplicants";
-import JobFilters from "../../components/pages/admin/JobFilters";
-import JobTable from "../../components/pages/admin/JobTable";
-import Pagination from "../../components/pages/admin/Pagination";
-import Notification, { NotificationType } from "../../components/ui/Notification";
+import JobFilters from "../../../components/pages/admin/JobFilters";
+import JobTable from "../../../components/pages/admin/JobTable";
+import Pagination from "../../../components/pages/admin/Pagination";
+import Notification, { NotificationType } from "../../../components/ui/Notification";
 
 const JobManagement = () => {
   const [jobs, setJobs] = useState(dummyJobs);
@@ -13,17 +14,15 @@ const JobManagement = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [jobsPerPage] = useState(5);
   const [notification, setNotification] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleAddJob = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleSaveJob = (newJob) => {
-    setJobs([...jobs, { ...newJob, _id: Date.now().toString() }]); // Tambahkan lowongan baru
-    setIsModalOpen(false);
-    setNotification({ type: NotificationType.SUCCESS, message: "Lowongan berhasil ditambahkan!" });
-  };
+  useEffect(() => {
+    if (notification) {
+      const timer = setTimeout(() => {
+        setNotification(null);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [notification]);
 
   const handleDelete = (id) => {
     if (window.confirm("Yakin ingin menghapus lowongan ini?")) {
@@ -49,18 +48,16 @@ const JobManagement = () => {
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
   const currentJobs = filteredJobs.slice(indexOfFirstJob, indexOfLastJob);
 
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="container mx-auto p-6">
-    <div>" "</div>
       {notification && <Notification type={notification.type} message={notification.message} />}
       <h1 className="text-4xl font-extrabold text-center mb-8 text-gray-800">Manajemen Lowongan Pekerjaan</h1>
       
-      <JobFilters search={search} setSearch={setSearch} filterStatus={filterStatus} setFilterStatus={setFilterStatus} onAddJob={handleAddJob} />
+      <JobFilters search={search} setSearch={setSearch} filterStatus={filterStatus} setFilterStatus={setFilterStatus} />
       <JobTable jobs={currentJobs} handleStatusToggle={handleStatusToggle} handleDelete={handleDelete} dummyApplicants={dummyApplicants} />
-      <Pagination jobsPerPage={jobsPerPage} totalJobs={filteredJobs.length} paginate={setCurrentPage} currentPage={currentPage} />
-
-      {/* Modal Tambah Lowongan */}
-      {isModalOpen && <JobFormModal onClose={() => setIsModalOpen(false)} onSave={handleSaveJob} />}
+      <Pagination jobsPerPage={jobsPerPage} totalJobs={filteredJobs.length} paginate={paginate} currentPage={currentPage} />
     </div>
   );
 };

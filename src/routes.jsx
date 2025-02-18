@@ -15,12 +15,13 @@ import Login from "./pages/login";
 
 // Admin pages
 import AdminDashboard from "./pages/admin";
-import PortfolioManagement from "./pages/admin/portofolio";
+import PortfolioManagement from "./pages/admin/portfolio/portofolio";
 import JobManagement from "./pages/admin/jobs";
 import WhatsappSettings from "./pages/admin/whatsapp";
 import Statistics from "./pages/admin/statistics";
-import Applicants from "./pages/admin/applicants";
-import ApplicantDetail from "./pages/admin/[id]";
+import Applicants from "./pages/admin/applicants/applicants";
+import ApplicantDetail from "./pages/admin/applicants/[id]";
+import AddJob from "./pages/admin/jobs/add";
 
 // Superadmin pages
 import SuperadminDashboard from "./pages/superadmin";
@@ -62,6 +63,14 @@ export const routes = (userRole) => [
     element: (
       <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
         <JobManagement />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin/addjob",
+    element: (
+      <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
+        <AddJob />
       </ProtectedRoute>
     ),
   },

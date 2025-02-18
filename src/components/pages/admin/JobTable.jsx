@@ -1,22 +1,66 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Button } from "../../ui/Button";
 
 const JobTable = ({ jobs, handleStatusToggle, handleDelete, dummyApplicants }) => {
+  const [sortConfig, setSortConfig] = React.useState({ key: null, direction: "ascending" });
+
+  const handleSort = (key) => {
+    let direction = "ascending";
+    if (sortConfig.key === key && sortConfig.direction === "ascending") {
+      direction = "descending";
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const sortedJobs = React.useMemo(() => {
+    if (sortConfig.key) {
+      return [...jobs].sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === "ascending" ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === "ascending" ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return jobs;
+  }, [jobs, sortConfig]);
+
+  const handleEdit = (id) => {
+    // Navigasi ke halaman edit
+    // Misalnya: history.push(`/admin/editjob/${id}`);
+    alert(`Edit job with id: ${id}`);
+  };
+
+  const confirmDelete = (id) => {
+    if (window.confirm("Apakah Anda yakin ingin menghapus lowongan ini?")) {
+      handleDelete(id);
+    }
+  };
+
   return (
     <div className="overflow-x-auto bg-white shadow-md rounded-lg">
       <table className="w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-100 text-gray-700">
-            <th className="py-4 px-6 text-left">Posisi</th>
-            <th className="py-4 px-6 text-left">Lokasi</th>
-            <th className="py-4 px-6 text-left">Gaji</th>
+            <th className="py-4 px-6 text-left cursor-pointer" onClick={() => handleSort("title")}>
+              Posisi {sortConfig.key === "title" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
+            </th>
+            <th className="py-4 px-6 text-left cursor-pointer" onClick={() => handleSort("location")}>
+              Lokasi {sortConfig.key === "location" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
+            </th>
+            <th className="py-4 px-6 text-left cursor-pointer" onClick={() => handleSort("salaryRange")}>
+              Gaji {sortConfig.key === "salaryRange" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
+            </th>
             <th className="py-4 px-6 text-left">Status</th>
             <th className="py-4 px-6 text-center">Pelamar</th>
             <th className="py-4 px-6 text-center">Aksi</th>
           </tr>
         </thead>
         <tbody>
-          {jobs.map((job) => {
+          {sortedJobs.map((job) => {
             const totalApplicants = dummyApplicants.filter(
               (app) => app.appliedPosition === job.title
             ).length;
@@ -57,11 +101,14 @@ const JobTable = ({ jobs, handleStatusToggle, handleDelete, dummyApplicants }) =
                   </span>
                 </td>
                 <td className="py-4 px-6 text-center">
-                  <Button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg shadow-sm mr-2">
+                  <Button
+                    onClick={() => handleEdit(job._id)}
+                    className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg shadow-sm mr-2"
+                  >
                     Edit
                   </Button>
                   <Button
-                    onClick={() => handleDelete(job._id)}
+                    onClick={() => confirmDelete(job._id)}
                     className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow-sm"
                   >
                     Hapus
