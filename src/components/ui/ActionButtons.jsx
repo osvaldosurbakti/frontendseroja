@@ -5,26 +5,23 @@ import { Button } from "./Button";
 const ActionButtons = ({ jobId, onDeleteClick }) => {
   return (
     <div className="flex gap-2">
-      {/* Tombol Edit */}
       <Link
         to={`/admin/jobs/edit/${jobId}`}
-        className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md text-sm"
+        className="px-4 py-2 text-sm font-medium text-white bg-yellow-500 rounded-md hover:bg-yellow-600 transition"
       >
         Edit
       </Link>
 
-      {/* Tombol Hapus */}
       <Button
         onClick={onDeleteClick}
-        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm"
+        className="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition"
       >
         Hapus
       </Button>
 
-      {/* Tombol Lihat Detail */}
       <Link
         to={`/admin/jobs/${jobId}`}
-        className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm"
+        className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md hover:bg-blue-600 transition"
       >
         Lihat Detail
       </Link>

@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import dummyJobs from "../../../data/dummyJobs";
-import Modal from "../../../components/ui/Modal"; // Import komponen Modal
+import Modal from "../../../components/ui/Modal";
 
 const JobDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  // Cari job berdasarkan ID
   const job = dummyJobs.find((job) => job._id === id);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); // State untuk modal hapus
 
   if (!job) {
     return (
@@ -23,21 +25,11 @@ const JobDetail = () => {
     );
   }
 
-  // Fungsi untuk menghapus lowongan
-  const handleDelete = () => {
-    setIsDeleteModalOpen(true);
-  };
-
-  // Fungsi untuk mengonfirmasi penghapusan
+  // Fungsi konfirmasi penghapusan
   const confirmDelete = () => {
     console.log("Lowongan dihapus:", job._id);
     alert("Lowongan berhasil dihapus!");
     navigate("/admin/jobs");
-  };
-
-  // Fungsi untuk navigasi ke halaman edit
-  const handleEdit = () => {
-    navigate(`/admin/jobs/edit/${job._id}`);
   };
 
   return (
@@ -63,14 +55,23 @@ const JobDetail = () => {
         </div>
 
         {/* Tombol Aksi */}
-        <div className="flex gap-4 mt-8">
-          <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg" onClick={handleEdit}>
+        <div className="flex flex-wrap gap-4 mt-8">
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition"
+            onClick={() => navigate(`/admin/jobs/edit/${job._id}`)}
+          >
             Edit
           </button>
-          <button className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg" onClick={handleDelete}>
+          <button
+            className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg transition"
+            onClick={() => setIsDeleteModalOpen(true)}
+          >
             Hapus
           </button>
-          <button className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg" onClick={() => navigate(-1)}>
+          <button
+            className="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg transition"
+            onClick={() => navigate(-1)}
+          >
             Kembali
           </button>
         </div>

@@ -1,38 +1,44 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Plus } from "lucide-react"; // Import ikon dari lucide-react
+import { Button } from "../../../ui/Button";
 
-const JobFilters = ({ search, setSearch, filterStatus, setFilterStatus }) => {
+const JobFilters = ({ 
+  searchQuery, 
+  onSearchChange, 
+  selectedStatus, 
+  onStatusChange, 
+  onAddJob 
+}) => {
   return (
-    <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
+    <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
       {/* Input Pencarian */}
       <input
         type="text"
+        value={searchQuery}
+        onChange={(e) => onSearchChange(e.target.value)}
         placeholder="Cari lowongan..."
-        className="w-full md:w-1/3 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        className="border p-2 rounded-md w-full md:w-auto flex-1"
+        aria-label="Cari lowongan"
       />
-
+      
       {/* Filter Status */}
       <select
-        className="w-full md:w-auto p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-        value={filterStatus}
-        onChange={(e) => setFilterStatus(e.target.value)}
+        value={selectedStatus}
+        onChange={(e) => onStatusChange(e.target.value)}
+        className="border p-2 rounded-md w-full md:w-auto"
+        aria-label="Filter status lowongan"
       >
         <option value="all">Semua Status</option>
         <option value="open">Dibuka</option>
         <option value="closed">Ditutup</option>
       </select>
 
-      {/* Tombol Tambah Pekerjaan */}
-      <Link
-        to="/admin/jobs/add"
-        className="w-full md:w-auto flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg transition-all"
+      {/* Tombol Tambah Lowongan */}
+      <Button
+        onClick={onAddJob}
+        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md"
       >
-        <Plus size={18} /> {/* Ikon tambah */}
-        <span>Tambah Pekerjaan</span>
-      </Link>
+        Tambah Lowongan
+      </Button>
     </div>
   );
 };
