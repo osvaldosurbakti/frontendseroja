@@ -9,7 +9,8 @@ const dummyApplicants = [
     resumeUrl: "https://example.com/resume-budi.pdf",
     experience: "3 tahun di bidang Frontend Development",
     skills: ["React.js", "Tailwind CSS", "REST API"],
-    appliedDate: "2025-02-10",
+    appliedDate: "2025-02-10", // Tanggal melamar
+    interviewDate: null, // Belum diundang interview
   },
   {
     _id: "102",
@@ -21,7 +22,8 @@ const dummyApplicants = [
     resumeUrl: "https://example.com/resume-siti.pdf",
     experience: "5 tahun di bidang Backend Development",
     skills: ["Node.js", "MongoDB", "Docker"],
-    appliedDate: "2025-02-09",
+    appliedDate: "2025-02-09", // Tanggal melamar
+    interviewDate: null, // Belum diundang interview
   },
   {
     _id: "103",
@@ -33,7 +35,8 @@ const dummyApplicants = [
     resumeUrl: "https://example.com/resume-ahmad.pdf",
     experience: "7 tahun mengelola proyek konstruksi",
     skills: ["Manajemen Proyek", "Budgeting", "Leadership"],
-    appliedDate: "2025-02-08",
+    appliedDate: "2025-02-08", // Tanggal melamar
+    interviewDate: "2025-02-15", // Tanggal diundang interview
   },
   {
     _id: "104",
@@ -45,7 +48,73 @@ const dummyApplicants = [
     resumeUrl: "https://example.com/resume-dewi.pdf",
     experience: "2 tahun pengalaman di bidang K3",
     skills: ["K3", "Audit Keselamatan", "Regulasi K3"],
-    appliedDate: "2025-02-07",
+    appliedDate: "2025-02-07", // Tanggal melamar
+    interviewDate: null, // Tidak diundang interview
+  },
+  {
+    _id: "105",
+    name: "Rudi Hermawan",
+    email: "rudi.hermawan@email.com",
+    phone: "08123456789",
+    appliedPosition: "UI/UX Designer",
+    status: "Pending",
+    resumeUrl: "https://example.com/resume-rudi.pdf",
+    experience: "4 tahun di bidang UI/UX Design",
+    skills: ["Figma", "Adobe XD", "User Research"],
+    appliedDate: "2025-02-10", // Tanggal melamar (hari ini)
+    interviewDate: null, // Belum diundang interview
+  },
+  {
+    _id: "106",
+    name: "Anisa Putri",
+    email: "anisa.putri@email.com",
+    phone: "08129876543",
+    appliedPosition: "Data Analyst",
+    status: "Interview Scheduled",
+    resumeUrl: "https://example.com/resume-anisa.pdf",
+    experience: "3 tahun di bidang Data Analysis",
+    skills: ["Python", "SQL", "Tableau"],
+    appliedDate: "2025-02-09", // Tanggal melamar
+    interviewDate: "2025-02-16", // Tanggal diundang interview
+  },
+  {
+    _id: "107",
+    name: "Fajar Nugraha",
+    email: "fajar.nugraha@email.com",
+    phone: "08561234789",
+    appliedPosition: "DevOps Engineer",
+    status: "Rejected",
+    resumeUrl: "https://example.com/resume-fajar.pdf",
+    experience: "6 tahun di bidang DevOps",
+    skills: ["AWS", "Kubernetes", "CI/CD"],
+    appliedDate: "2025-02-07", // Tanggal melamar
+    interviewDate: null, // Tidak diundang interview
+  },
+  {
+    _id: "108",
+    name: "Maya Indah",
+    email: "maya.indah@email.com",
+    phone: "08135467892",
+    appliedPosition: "Product Manager",
+    status: "Accepted", // Status baru: Diterima
+    resumeUrl: "https://example.com/resume-maya.pdf",
+    experience: "8 tahun di bidang Product Management",
+    skills: ["Agile", "Scrum", "Product Roadmap"],
+    appliedDate: "2025-02-06", // Tanggal melamar
+    interviewDate: "2025-02-14", // Tanggal diundang interview
+  },
+  {
+    _id: "109",
+    name: "Doni Pratama",
+    email: "doni.pratama@email.com",
+    phone: "08123456789",
+    appliedPosition: "Mobile Developer",
+    status: "Pending",
+    resumeUrl: "https://example.com/resume-doni.pdf",
+    experience: "2 tahun di bidang Mobile Development",
+    skills: ["Flutter", "React Native", "Firebase"],
+    appliedDate: "2025-02-10", // Tanggal melamar (hari ini)
+    interviewDate: null, // Belum diundang interview
   },
 ];
 
