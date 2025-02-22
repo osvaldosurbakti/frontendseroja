@@ -11,6 +11,14 @@ const CategoryFilter = ({
 }) => {
   const { t } = useTranslation();
 
+  // Mapping kategori agar sesuai dengan ID yang diterjemahkan
+  const categoryMap = {
+    "konstruksi-gedung": "building_construction",
+    "konstruksi-sipil": "civil_construction",
+    "desain-interior-eksterior": "interior_exterior_design",
+    "marmer": "marble",
+  };
+
   return (
     <div className="flex flex-col md:flex-row gap-4 w-full">
       {/* Search Bar */}
@@ -36,12 +44,15 @@ const CategoryFilter = ({
           {/* Default empty option */}
           <option value="">{t("portfolio.all_categories")}</option>
 
-          {/* Dynamically render category options */}
-          {categories.map((category) => (
-            <option key={category.id} value={category.id}>
-              {t(`portfolio.categories.${category.id}`, category.name)}
-            </option>
-          ))}
+          {/* Dynamically render category options with translation */}
+          {categories.map((category) => {
+            const translatedCategoryId = categoryMap[category.id] || category.id;
+            return (
+              <option key={category.id} value={category.id}>
+                {t(`portfolio.categories.${translatedCategoryId}`, category.name)}
+              </option>
+            );
+          })}
         </select>
       </div>
     </div>

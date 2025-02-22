@@ -9,26 +9,20 @@ const PortfolioTable = ({ portfolios = [], onEdit, onDelete, onViewDetail }) => 
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "ascending" });
 
   const handleSort = (key) => {
-    let direction = "ascending";
-    if (sortConfig.key === key && sortConfig.direction === "ascending") {
-      direction = "descending";
-    }
-    setSortConfig({ key, direction });
+    setSortConfig((prev) => ({
+      key,
+      direction: prev.key === key && prev.direction === "ascending" ? "descending" : "ascending",
+    }));
   };
 
   const sortedPortfolios = useMemo(() => {
-    if (sortConfig.key) {
-      return [...portfolios].sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
-          return sortConfig.direction === "ascending" ? -1 : 1;
-        }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
-          return sortConfig.direction === "ascending" ? 1 : -1;
-        }
-        return 0;
-      });
-    }
-    return portfolios;
+    if (!sortConfig.key) return portfolios;
+
+    return [...portfolios].sort((a, b) => {
+      if (a[sortConfig.key] < b[sortConfig.key]) return sortConfig.direction === "ascending" ? -1 : 1;
+      if (a[sortConfig.key] > b[sortConfig.key]) return sortConfig.direction === "ascending" ? 1 : -1;
+      return 0;
+    });
   }, [portfolios, sortConfig]);
 
   const handleDeleteClick = (portfolio) => {
@@ -53,18 +47,19 @@ const PortfolioTable = ({ portfolios = [], onEdit, onDelete, onViewDetail }) => 
       <table className="w-full min-w-max">
         <thead className="bg-gray-100">
           <tr>
-            <th className="p-4 text-left text-sm font-semibold text-gray-700 cursor-pointer" onClick={() => handleSort("title")}>
-              Judul {sortConfig.key === "title" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
-            </th>
-            <th className="p-4 text-left text-sm font-semibold text-gray-700 cursor-pointer" onClick={() => handleSort("category")}>
-              Kategori {sortConfig.key === "category" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
-            </th>
-            <th className="p-4 text-left text-sm font-semibold text-gray-700 cursor-pointer" onClick={() => handleSort("description")}>
-              Deskripsi {sortConfig.key === "description" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
-            </th>
-            <th className="p-4 text-left text-sm font-semibold text-gray-700 cursor-pointer" onClick={() => handleSort("status")}>
-              Status {sortConfig.key === "status" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
-            </th>
+            {["title", "category.name", "description", "status"].map((key) => (
+              <th
+                key={key}
+                className="p-4 text-left text-sm font-semibold text-gray-700 cursor-pointer"
+                onClick={() => handleSort(key)}
+              >
+                {key === "title" && "Judul"}
+                {key === "category.name" && "Kategori"}
+                {key === "description" && "Deskripsi"}
+                {key === "status" && "Status"}
+                {sortConfig.key === key && (sortConfig.direction === "ascending" ? " ↑" : " ↓")}
+              </th>
+            ))}
             <th className="p-4 text-left text-sm font-semibold text-gray-700">Aksi</th>
           </tr>
         </thead>
@@ -73,7 +68,7 @@ const PortfolioTable = ({ portfolios = [], onEdit, onDelete, onViewDetail }) => 
             sortedPortfolios.map((item) => (
               <tr key={item._id} className="border-b hover:bg-gray-50 transition-all">
                 <td className="p-4 text-sm text-gray-800">{item.title}</td>
-                <td className="p-4 text-sm text-gray-800">{item.category}</td>
+                <td className="p-4 text-sm text-gray-800">{item.category.name}</td>
                 <td className="p-4 text-sm text-gray-800 max-w-xs truncate">{item.description}</td>
                 <td className="p-4 text-sm">
                   <span
@@ -88,22 +83,13 @@ const PortfolioTable = ({ portfolios = [], onEdit, onDelete, onViewDetail }) => 
                 </td>
                 <td className="p-4 text-sm">
                   <div className="flex gap-2">
-                    <Button
-                      onClick={() => onEdit(item._id)}
-                      className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md text-sm"
-                    >
+                    <Button onClick={() => onEdit(item._id)} className="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded-md text-sm">
                       Edit
                     </Button>
-                    <Button
-                      onClick={() => handleDeleteClick(item)}
-                      className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm"
-                    >
+                    <Button onClick={() => handleDeleteClick(item)} className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm">
                       Hapus
                     </Button>
-                    <Button
-                      onClick={() => onViewDetail(item)}
-                      className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm"
-                    >
+                    <Button onClick={() => onViewDetail(item)} className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm">
                       Lihat Detail
                     </Button>
                   </div>
@@ -132,25 +118,16 @@ const PortfolioTable = ({ portfolios = [], onEdit, onDelete, onViewDetail }) => 
         <div className="p-6">
           <h2 className="text-xl font-bold mb-4">Hapus Portofolio</h2>
           <p className="text-gray-700 mb-6">
-            Apakah Anda yakin ingin menghapus {" "}
-            <strong>{selectedPortfolio?.title}</strong>?
+            Apakah Anda yakin ingin menghapus <strong>{selectedPortfolio?.title}</strong>?
           </p>
           <div className="flex justify-end gap-4">
-            <Button
-              onClick={() => {
-                setIsDeleteModalOpen(false);
-                setSelectedPortfolio(null);
-              }}
-              className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md"
-            >
+            <Button onClick={() => setIsDeleteModalOpen(false)} className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md">
               Batal
             </Button>
             <Button
               onClick={confirmDelete}
               disabled={isDeleting}
-              className={`px-4 py-2 rounded-md text-white ${
-                isDeleting ? "bg-red-300 cursor-not-allowed" : "bg-red-500 hover:bg-red-600"
-              }`}
+              className={`px-4 py-2 rounded-md text-white ${isDeleting ? "bg-red-300 cursor-not-allowed" : "bg-red-500 hover:bg-red-600"}`}
             >
               {isDeleting ? "Menghapus..." : "Hapus"}
             </Button>
