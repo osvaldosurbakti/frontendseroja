@@ -2,7 +2,7 @@ import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
-const SearchBar = ({ searchQuery, onSearchChange }) => {
+const SearchBar = ({ value, onChange }) => {
   const { t } = useTranslation();
 
   return (
@@ -11,12 +11,13 @@ const SearchBar = ({ searchQuery, onSearchChange }) => {
       <input
         type="text"
         placeholder={t("search.placeholder")}
-        value={searchQuery}
-        onChange={onSearchChange}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
         className="pl-10 pr-4 py-2 border rounded-lg w-full bg-white shadow-sm focus:ring-2 focus:ring-blue-400 transition-all duration-200"
       />
     </div>
   );
 };
+
 
 export default SearchBar;
