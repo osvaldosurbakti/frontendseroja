@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   category: "",
   searchQuery: "",
-  randomTestimonial: null, // 🔹 Tambahkan state ini
+  randomTestimonial: null,
+  lastTestimonialIndex: null, // 🔹 Simpan indeks terakhir agar tidak mengulang
   testimonials: [
     { text: "Pelayanan sangat baik, proyek selesai tepat waktu!", name: "Budi Santoso" },
     { text: "Hasil kerja sangat memuaskan, desain modern dan rapi.", name: "Siti Rahma" },
@@ -22,8 +23,13 @@ const portfolioSlice = createSlice({
       state.searchQuery = action.payload;
     },
     setRandomTestimonial: (state) => {
-      const randomIndex = Math.floor(Math.random() * state.testimonials.length);
-      state.randomTestimonial = state.testimonials[randomIndex]; // 🔹 Update state dengan testimonial acak
+      let randomIndex;
+      do {
+        randomIndex = Math.floor(Math.random() * state.testimonials.length);
+      } while (randomIndex === state.lastTestimonialIndex); // 🔹 Pastikan tidak memilih yang sama dua kali berturut-turut
+
+      state.lastTestimonialIndex = randomIndex;
+      state.randomTestimonial = state.testimonials[randomIndex];
     },
   },
 });

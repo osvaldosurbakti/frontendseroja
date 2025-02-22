@@ -1,4 +1,14 @@
+import React from "react";
+
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+  const maxPageNumbers = 5;
+  let startPage = Math.max(1, currentPage - Math.floor(maxPageNumbers / 2));
+  let endPage = Math.min(totalPages, startPage + maxPageNumbers - 1);
+
+  if (endPage - startPage + 1 < maxPageNumbers) {
+    startPage = Math.max(1, endPage - maxPageNumbers + 1);
+  }
+
   return (
     <div className="flex justify-center items-center space-x-2 mt-4">
       <button
@@ -15,17 +25,23 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       >
         Prev
       </button>
-      {Array.from({ length: totalPages }, (_, i) => (
+
+      {startPage > 1 && <span className="px-3 py-1">...</span>}
+
+      {Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map((page) => (
         <button
-          key={i}
-          onClick={() => onPageChange(i + 1)}
+          key={page}
+          onClick={() => onPageChange(page)}
           className={`px-3 py-1 rounded ${
-            currentPage === i + 1 ? "bg-blue-600 text-white" : "bg-gray-200 hover:bg-gray-300"
+            currentPage === page ? "bg-blue-600 text-white" : "bg-gray-200 hover:bg-gray-300"
           }`}
         >
-          {i + 1}
+          {page}
         </button>
       ))}
+
+      {endPage < totalPages && <span className="px-3 py-1">...</span>}
+
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}

@@ -98,40 +98,39 @@
   "location": {
     "title": "Our Location",
     "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31693.600000000007!2d98.6659279!3d3.5951955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x303131f2c72a3ed9%3A0x47d4c4fbee88888!2sSeroja%20Medan%20Group!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
-  }, 
-    "portfolio": {
-      "title": "Portfolio List",
-      "categories": {
-        "building_construction": "Building Construction",
-        "civil_construction": "Civil Construction",
-        "interior_exterior_design": "Interior and Exterior Design",
-        "marble": "Marble"
-      },
-      "no_categories": "No categories available.",
-      "no_testimonials": "No testimonials available.",
-      "video_title": "Video About Us",
-      "no_results": "No results found for this category.",
-      "view_details": "View Details",
-      "all_categories": "All Categories",
-      "loading": "Loading portfolio...",
-      "detailTitle": "Portfolio Details",
-  "notFound": "Portfolio not found.",
+  },
+  "portfolio": {
+    "title": "Portfolio",
+    "categories": {
+      "building_construction": "Building Construction",
+      "civil_construction": "Civil Construction",
+      "interior_exterior_design": "Interior & Exterior Design",
+      "marble": "Marble"
+    },
+    "no_categories": "No categories available.",
+    "no_testimonials": "No testimonials available.",
+    "video_title": "Video About Us",
+    "no_results": "No results found for this category.",
+    "view_details": "View Details",
+    "all_categories": "All Categories",
+    "loading": "Loading portfolio...",
+    "detailTitle": "Portfolio Details",
+    "notFound": "Portfolio not found.",
     "category": "Category",
     "created": "Created",
     "updated": "Updated",
     "contactViaWhatsApp": "Contact Us via WhatsApp",
     "whatsappMessage": "Hello, I'm interested in the portfolio {{title}}.",
-    "backToCategory": "Back to {{category}} List"
-    },
-    
-      "testimonial": {
-        "title": "What Our Clients Say?"
-      },
-      "videoSection": {
-        "title": "Portfolio",
-        "videoTitle": "Portfolio Video"
-      },
-      "search": {
-        "placeholder": "Search..."
-      }
+    "backToCategory": "Back to Portfolio List"
+  },
+  "testimonial": {
+    "title": "What Our Clients Say?"
+  },
+  "videoSection": {
+    "title": "Portfolio",
+    "videoTitle": "Portfolio Video"
+  },
+  "search": {
+    "placeholder": "Search..."
+  }
 }

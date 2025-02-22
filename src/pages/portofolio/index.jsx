@@ -1,82 +1,59 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setCategory, setSearchQuery, setRandomTestimonial, selectCategory, selectSearchQuery } from "../../components/redux/slices/portfolioSlice";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import CategoryFilter from "../../components/ui/CategoryFilter";
-import SearchBar from "../../components/ui/SearchBar";
 import PortfolioCategory from "../../components/pages/portfolio/PortfolioCategory";
+import portfolioItems from "../../data/dummyPortofolio";
 import Testimonial from "../../components/pages/portfolio/Testimonial";
 import VideoSection from "../../components/ui/VideoSection";
-import { useRef } from "react";
-
 
 const PortfolioPage = () => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const selectedCategory = useSelector(selectCategory);
-  const searchQuery = useSelector(selectSearchQuery);
-  const testimonials = useSelector((state) => state.portfolio.testimonials);
-  const intervalRef = useRef(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
-
-  // Kategori dengan terjemahan
-  const categories = [
-    { id: "building_construction", name: t("portfolio.categories.building_construction") },
-    { id: "civil_construction", name: t("portfolio.categories.civil_construction") },
-    { id: "interior_exterior_design", name: t("portfolio.categories.interior_exterior_design") },
-    { id: "marble", name: t("portfolio.categories.marble") },
+  const uniqueCategories = [
+    ...new Map(portfolioItems.map((item) => [item.category?.id, item.category])).values(),
   ];
-  
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      dispatch(setRandomTestimonial());
-    }, 5000);
-  
-    intervalRef.current = interval;
-  
-    return () => clearInterval(interval);
-  }, [dispatch]);
-  
-  
+  const filteredItems = portfolioItems.filter((item) => {
+    const matchesCategory = selectedCategory === "" || item.category?.id === selectedCategory;
+    const matchesSearch =
+      searchQuery === "" ||
+      (item.title && item.title.toLowerCase().includes(searchQuery.toLowerCase()));
 
-  const handleCategoryChange = (e) => dispatch(setCategory(e.target.value));
-  const handleSearchChange = (e) => dispatch(setSearchQuery(e.target.value));
-
-  if (!categories.length) return <div>{t("portfolio.no_categories")}</div>;
-if (!testimonials?.length) return <div>{t("portfolio.no_testimonials")}</div>;
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <section className="py-16 bg-gradient-to-b from-blue-50 to-white">
       <div className="container mx-auto px-6">
-        <motion.h2
-          className="text-4xl font-extrabold text-center mb-12 text-blue-700 drop-shadow-md"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-        >
+        <h2 className="text-4xl font-extrabold text-center mb-12 text-blue-700">
           {t("portfolio.title")}
-        </motion.h2>
+        </h2>
 
-        <div className="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
-          <CategoryFilter selectedCategory={selectedCategory} onCategoryChange={handleCategoryChange} categories={categories} />
-          <SearchBar searchQuery={searchQuery} onSearchChange={handleSearchChange} />
-        </div>
+        <CategoryFilter
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          selectedCategory={selectedCategory}
+          onCategoryChange={setSelectedCategory}
+          categories={uniqueCategories}
+        />
 
-        {categories
-          .filter((category) => selectedCategory === "" || category.id === selectedCategory)
+        {uniqueCategories
+          .filter((category) => filteredItems.some((item) => item.category?.id === category.id))
           .map((category) => (
-            <PortfolioCategory key={category.id} category={category.id} searchQuery={searchQuery} />
+            <PortfolioCategory
+              key={category.id}
+              category={category}
+              searchQuery={searchQuery}
+            />
           ))}
 
-<VideoSection videoUrl="https://www.youtube.com/embed/WDI4luNyBkQ?enablejsapi=1&modestbranding=1&rel=0" />
-
         <Testimonial />
+        <VideoSection videoUrl="https://www.youtube.com/embed/WDI4luNyBkQ" />
       </div>
-      
     </section>
   );
-  
 };
+
 export default PortfolioPage;

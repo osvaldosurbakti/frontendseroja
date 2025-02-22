@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 const PortfolioDetailPage = () => {
-  const { id } = useParams();
+  const { id } = useParams(); // Ambil ID dari URL
   const { t } = useTranslation();
 
   return (
@@ -25,6 +25,7 @@ const PortfolioDetailPage = () => {
           transition={{ duration: 0.5 }}
           className="p-6 bg-gray-100 shadow-lg rounded-lg"
         >
+          {/* Kirim ID ke komponen PortfolioDetail */}
           <PortfolioDetail id={id} />
         </motion.div>
       </div>

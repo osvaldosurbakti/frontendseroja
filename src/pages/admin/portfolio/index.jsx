@@ -4,8 +4,8 @@ import portfolioItems from "../../../data/dummyPortofolio";
 import { Button } from "../../../components/ui/Button";
 import Pagination from "../../../components/ui/Pagination";
 import PortfolioTable from "../../../components/pages/admin/portfolio/PortfolioTable";
-import SearchBar from "../../../components/ui/SearchBar";
 import CategoryFilter from "../../../components/ui/CategoryFilter";
+import DataPortfolio from "../../../components/pages/admin/portfolio/DataPortfolio";
 
 const PortfolioManagement = () => {
   const [portfolios, setPortfolios] = useState(portfolioItems);
@@ -64,21 +64,23 @@ const PortfolioManagement = () => {
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Manajemen Portofolio</h1>
-
+<DataPortfolio />
       {/* Search & Filter */}
       <div className="flex flex-col md:flex-row gap-4 mb-6">
-        <SearchBar value={search} onChange={(e) => setSearch(e.target.value)} />
         <CategoryFilter
-          selectedCategory={filterCategory}
-          onCategoryChange={setFilterCategory}
-          categories={[
-            { id: "All", name: "Semua Kategori" },
-            ...[...new Set(portfolioItems.map((item) => item.category))].map((category) => ({
-              id: category,
-              name: category,
-            })),
-          ]}
-        />
+  searchQuery={search}
+  onSearchChange={(e) => setSearch(e.target.value)}
+  selectedCategory={filterCategory}
+  onCategoryChange={setFilterCategory}
+  categories={[
+    { id: "All", name: "Semua Kategori" },
+    ...[...new Set(portfolioItems.map((item) => item.category))].map((category) => ({
+      id: category,
+      name: category,
+    })),
+  ]}
+/>
+
         <Button
           onClick={() => navigate("/admin/portfolio/add")}
           className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md"

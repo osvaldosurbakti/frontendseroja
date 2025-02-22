@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -6,35 +6,21 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import "swiper/css";
 import "swiper/css/navigation";
-import portfolioItems from "../../../data/dummyPortofolio";
+import portfolioItems from "../../../data/dummyPortofolio"; // Pastikan path ini benar
 
 const PortfolioList = ({ category, searchQuery }) => {
   const { t } = useTranslation();
-  const [loading, setLoading] = useState(true);
-  const [filteredPortfolios, setFilteredPortfolios] = useState([]);
 
-  useEffect(() => {
-    setLoading(true);
-    const timer = setTimeout(() => {
-      const result = portfolioItems.filter(
-        (item) =>
-          item.status === "active" &&
-          item.category.id === category.id &&
-          item.title.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFilteredPortfolios(result);
-      setLoading(false);
-    }, 500); // Mengurangi waktu loading agar lebih responsif
-    return () => clearTimeout(timer);
-  }, [category.id, searchQuery]);
+  // Filter items based on category and search query
+  const filteredPortfolios = portfolioItems.filter((item) => {
+    const matchesCategory = category === "" || item.category?.id === category;
+    const matchesSearch =
+      searchQuery === "" ||
+      (item.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.description?.toLowerCase().includes(searchQuery.toLowerCase()));
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-48">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
-    );
-  }
+    return matchesCategory && matchesSearch;
+  });
 
   if (filteredPortfolios.length === 0) {
     return (

@@ -1,11 +1,35 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-
-const PortfolioList = lazy(() => import("./PortfolioList"));
+import PortfolioList from "./PortfolioList";
 
 const PortfolioCategory = ({ category, searchQuery }) => {
   const { t } = useTranslation();
+
+  // Pemetaan kategori untuk terjemahan
+  const categoryMap = {
+    "konstruksi-gedung": "building_construction",
+    "konstruksi-sipil": "civil_construction",
+    "desain-interior-eksterior": "interior_exterior_design",
+    "marmer": "marble",
+  };
+
+  // Gunakan ID yang sudah diterjemahkan atau pakai default jika tidak ada di mapping
+  const translatedCategoryId = categoryMap[category?.id] || category?.id;
+  const categoryName = t(`portfolio.categories.${translatedCategoryId}`, { defaultValue: category?.name });
+
+  if (!category || !category.id) {
+    return (
+      <motion.p
+        className="text-center text-gray-500 italic"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        {t("portfolio.no_categories")}
+      </motion.p>
+    );
+  }
 
   return (
     <motion.div
@@ -17,11 +41,11 @@ const PortfolioCategory = ({ category, searchQuery }) => {
         className="text-2xl font-bold text-blue-600 mb-6 border-b pb-2 hover:text-blue-800 transition-colors duration-300"
         whileHover={{ scale: 1.05, color: "#1E40AF" }}
       >
-        {t(`portfolio.categories.${category}`, category)}
+        {categoryName}
       </motion.h3>
-      <Suspense fallback={<p className="text-center">{t("portfolio.loading")}</p>}>
-        <PortfolioList category={category} searchQuery={searchQuery.toLowerCase()} />
-      </Suspense>
+
+      {/* List portofolio berdasarkan kategori */}
+      <PortfolioList category={category.id} searchQuery={searchQuery} />
     </motion.div>
   );
 };

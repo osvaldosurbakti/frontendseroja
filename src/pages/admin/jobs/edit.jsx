@@ -1,25 +1,77 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import dummyJobs from "../../../data/dummyJobs";
+import JobForm from "../../../components/pages/admin/jobs/JobForm"; // Import komponen JobForm
+import dummyJobs from "../../../data/dummyJobs"; // Import data dummy
+import Modal from "../../../components/ui/Modal"; // Import komponen Modal
 
 const EditJob = () => {
-  const { id } = useParams();
+  const { id } = useParams(); // Ambil ID dari URL
   const navigate = useNavigate();
-  const jobToEdit = dummyJobs.find((job) => job._id === id);
+  const [initialData, setInitialData] = useState(null); // State untuk menyimpan data awal
+  const [isLoading, setIsLoading] = useState(true); // State untuk loading
+  const [error, setError] = useState(null); // State untuk error
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false); // State untuk modal konfirmasi
+  const [updatedJobData, setUpdatedJobData] = useState(null); // State untuk menyimpan data yang akan di-submit
 
-  const [formData, setFormData] = useState(jobToEdit || {
-    title: "",
-    company: "",
-    location: "",
-    salary: "",
-    description: "",
-    status: "open",
-  });
+  // Simulasikan pengambilan data dari API
+  useEffect(() => {
+    const fetchJobData = () => {
+      try {
+        const jobToEdit = dummyJobs.find((job) => job._id === id); // Cari pekerjaan berdasarkan ID
+        if (!jobToEdit) {
+          throw new Error("Lowongan tidak ditemukan!");
+        }
 
-  if (!jobToEdit) {
+        // Format data sebelum diteruskan ke JobForm
+        const formattedJob = {
+          ...jobToEdit,
+          requirements: jobToEdit.requirements.join(", "), // Ubah array requirements menjadi string
+        };
+        setInitialData(formattedJob);
+      } catch (err) {
+        setError(err.message); // Set error jika terjadi masalah
+      } finally {
+        setIsLoading(false); // Set loading selesai
+      }
+    };
+
+    fetchJobData();
+  }, [id]);
+
+  // Fungsi untuk menangani submit
+  const handleSubmit = (updatedJob) => {
+    setUpdatedJobData(updatedJob); // Simpan data yang akan di-submit
+    setIsConfirmModalOpen(true); // Buka modal konfirmasi
+  };
+
+  // Fungsi untuk menangani konfirmasi
+  const handleConfirm = () => {
+    console.log("Lowongan Diperbarui:", updatedJobData);
+    alert("Lowongan berhasil diperbarui!");
+    navigate("/admin/jobs"); // Navigasi kembali ke halaman daftar pekerjaan
+    setIsConfirmModalOpen(false); // Tutup modal
+  };
+
+  // Fungsi untuk menangani batal
+  const handleCancel = () => {
+    setIsConfirmModalOpen(false); // Tutup modal tanpa melakukan apa-apa
+  };
+
+  // Jika data sedang dimuat
+  if (isLoading) {
     return (
       <div className="container mx-auto p-6 text-center">
-        <h1 className="text-3xl font-bold text-red-600">Lowongan tidak ditemukan!</h1>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mx-auto"></div>
+        <p className="mt-4 text-gray-700">Memuat data...</p>
+      </div>
+    );
+  }
+
+  // Jika terjadi error
+  if (error) {
+    return (
+      <div className="container mx-auto p-6 text-center">
+        <h1 className="text-3xl font-bold text-red-600">{error}</h1>
         <button
           className="mt-4 bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded"
           onClick={() => navigate(-1)}
@@ -30,46 +82,21 @@ const EditJob = () => {
     );
   }
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Lowongan berhasil diperbarui!");
-    navigate("/admin/jobs");
-  };
-
+  // Render JobForm dengan initialData dan handleSubmit
   return (
-    <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-4">Edit Lowongan</h1>
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md">
-        <label className="block mb-2">Judul Pekerjaan</label>
-        <input type="text" name="title" value={formData.title} onChange={handleChange} className="w-full p-2 border rounded mb-4" required />
+    <div>
+      <JobForm initialData={initialData} onSubmit={handleSubmit} />
 
-        <label className="block mb-2">Perusahaan</label>
-        <input type="text" name="company" value={formData.company} onChange={handleChange} className="w-full p-2 border rounded mb-4" required />
-
-        <label className="block mb-2">Lokasi</label>
-        <input type="text" name="location" value={formData.location} onChange={handleChange} className="w-full p-2 border rounded mb-4" required />
-
-        <label className="block mb-2">Gaji</label>
-        <input type="text" name="salary" value={formData.salary} onChange={handleChange} className="w-full p-2 border rounded mb-4" required />
-
-        <label className="block mb-2">Deskripsi</label>
-        <textarea name="description" value={formData.description} onChange={handleChange} className="w-full p-2 border rounded mb-4" required />
-
-        <label className="block mb-2">Status</label>
-        <select name="status" value={formData.status} onChange={handleChange} className="w-full p-2 border rounded mb-4">
-          <option value="open">Dibuka</option>
-          <option value="closed">Ditutup</option>
-        </select>
-
-        <div className="flex justify-between">
-          <button type="submit" className="bg-green-500 hover:bg-green-700 text-white px-4 py-2 rounded">Simpan Perubahan</button>
-          <button type="button" className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded" onClick={() => navigate(-1)}>Batal</button>
-        </div>
-      </form>
+      {/* Modal Konfirmasi */}
+      <Modal
+        isOpen={isConfirmModalOpen}
+        onClose={handleCancel}
+        onConfirm={handleConfirm}
+        isConfirmModal={true}
+        message="Apakah Anda yakin ingin menyimpan perubahan?"
+        confirmText="Ya, Simpan"
+        cancelText="Batal"
+      />
     </div>
   );
 };

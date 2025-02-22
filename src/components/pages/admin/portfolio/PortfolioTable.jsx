@@ -1,22 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Button } from "../../../ui/Button";
-import Modal from "../../../ui/Modal"; // Import modal
+import Modal from "../../../ui/Modal";
 
 const PortfolioTable = ({ portfolios = [], onEdit, onDelete, onViewDetail }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [selectedPortfolio, setSelectedPortfolio] = useState(null); // Simpan data portfolio yang akan dihapus
+  const [selectedPortfolio, setSelectedPortfolio] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: "ascending" });
+
+  const handleSort = (key) => {
+    let direction = "ascending";
+    if (sortConfig.key === key && sortConfig.direction === "ascending") {
+      direction = "descending";
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const sortedPortfolios = useMemo(() => {
+    if (sortConfig.key) {
+      return [...portfolios].sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === "ascending" ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === "ascending" ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return portfolios;
+  }, [portfolios, sortConfig]);
 
   const handleDeleteClick = (portfolio) => {
     setSelectedPortfolio(portfolio);
-    setIsDeleteModalOpen(true); // Buka modal konfirmasi
+    setIsDeleteModalOpen(true);
   };
 
-  const confirmDelete = () => {
-    if (selectedPortfolio) {
-      onDelete(selectedPortfolio._id);
-      setIsDeleteModalOpen(false);
-      setSelectedPortfolio(null);
-    }
+  const confirmDelete = async () => {
+    if (!selectedPortfolio || isDeleting) return;
+
+    setIsDeleting(true);
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    onDelete(selectedPortfolio._id);
+
+    setIsDeleteModalOpen(false);
+    setSelectedPortfolio(null);
+    setIsDeleting(false);
   };
 
   return (
@@ -24,16 +53,24 @@ const PortfolioTable = ({ portfolios = [], onEdit, onDelete, onViewDetail }) => 
       <table className="w-full min-w-max">
         <thead className="bg-gray-100">
           <tr>
-            <th className="p-4 text-left text-sm font-semibold text-gray-700">Judul</th>
-            <th className="p-4 text-left text-sm font-semibold text-gray-700">Kategori</th>
-            <th className="p-4 text-left text-sm font-semibold text-gray-700">Deskripsi</th>
-            <th className="p-4 text-left text-sm font-semibold text-gray-700">Status</th>
+            <th className="p-4 text-left text-sm font-semibold text-gray-700 cursor-pointer" onClick={() => handleSort("title")}>
+              Judul {sortConfig.key === "title" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
+            </th>
+            <th className="p-4 text-left text-sm font-semibold text-gray-700 cursor-pointer" onClick={() => handleSort("category")}>
+              Kategori {sortConfig.key === "category" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
+            </th>
+            <th className="p-4 text-left text-sm font-semibold text-gray-700 cursor-pointer" onClick={() => handleSort("description")}>
+              Deskripsi {sortConfig.key === "description" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
+            </th>
+            <th className="p-4 text-left text-sm font-semibold text-gray-700 cursor-pointer" onClick={() => handleSort("status")}>
+              Status {sortConfig.key === "status" && (sortConfig.direction === "ascending" ? "↑" : "↓")}
+            </th>
             <th className="p-4 text-left text-sm font-semibold text-gray-700">Aksi</th>
           </tr>
         </thead>
         <tbody>
-          {portfolios.length > 0 ? (
-            portfolios.map((item) => (
+          {sortedPortfolios.length > 0 ? (
+            sortedPortfolios.map((item) => (
               <tr key={item._id} className="border-b hover:bg-gray-50 transition-all">
                 <td className="p-4 text-sm text-gray-800">{item.title}</td>
                 <td className="p-4 text-sm text-gray-800">{item.category}</td>
@@ -84,25 +121,38 @@ const PortfolioTable = ({ portfolios = [], onEdit, onDelete, onViewDetail }) => 
       </table>
 
       {/* Modal Konfirmasi Hapus */}
-      <Modal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)}>
+      <Modal
+        isOpen={isDeleteModalOpen}
+        onClose={() => {
+          setIsDeleteModalOpen(false);
+          setSelectedPortfolio(null);
+        }}
+        aria-hidden={!isDeleteModalOpen}
+      >
         <div className="p-6">
-          <h2 className="text-xl font-bold mb-4">Hapus Portfolio</h2>
+          <h2 className="text-xl font-bold mb-4">Hapus Portofolio</h2>
           <p className="text-gray-700 mb-6">
-            Apakah Anda yakin ingin menghapus{" "}
+            Apakah Anda yakin ingin menghapus {" "}
             <strong>{selectedPortfolio?.title}</strong>?
           </p>
           <div className="flex justify-end gap-4">
             <Button
-              onClick={() => setIsDeleteModalOpen(false)}
+              onClick={() => {
+                setIsDeleteModalOpen(false);
+                setSelectedPortfolio(null);
+              }}
               className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md"
             >
               Batal
             </Button>
             <Button
               onClick={confirmDelete}
-              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md"
+              disabled={isDeleting}
+              className={`px-4 py-2 rounded-md text-white ${
+                isDeleting ? "bg-red-300 cursor-not-allowed" : "bg-red-500 hover:bg-red-600"
+              }`}
             >
-              Hapus
+              {isDeleting ? "Menghapus..." : "Hapus"}
             </Button>
           </div>
         </div>

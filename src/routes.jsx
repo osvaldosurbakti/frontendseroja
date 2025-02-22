@@ -9,20 +9,20 @@ import HubungiKami from "./pages/hubungiKami";
 import PortfolioPage from "./pages/portofolio";
 import PortfolioDetailPage from "./pages/portofolio/[id]";
 import Karir from "./pages/karir";
-import JobDetail from "./pages/karir/[id]";
+import JobDetailPublic from "./pages/karir/[id]"; // JobDetail untuk publik
 import ApplicationForm from "./pages/karir/apply";
 import Login from "./pages/login";
 
 // Admin pages
 import AdminDashboard from "./pages/admin";
-import PortfolioManagement from "./pages/admin/portfolio/";
 import WhatsappSettings from "./pages/admin/whatsapp";
 import Statistics from "./pages/admin/statistics";
 import Applicants from "./pages/admin/applicants/applicants";
 import ApplicantDetail from "./pages/admin/applicants/[id]";
 import JobManagement from "./pages/admin/jobs";
 import AddJob from "./pages/admin/jobs/add";
-import EditJob from "./pages/admin/jobs/edit"; // Tambahkan impor untuk EditJob
+import EditJob from "./pages/admin/jobs/edit";
+import JobDetailAdmin from "./pages/admin/jobs/[id]"; // JobDetail untuk admin
 import PortfolioList from "./pages/admin/portfolio/index";
 import PortfolioDetail from "./pages/admin/portfolio/[id]";
 import AddPortfolio from "./pages/admin/portfolio/add";
@@ -41,7 +41,7 @@ export const routes = (userRole) => [
   { path: "/portofolio", element: <PortfolioPage /> },
   { path: "/portofolio/:id", element: <PortfolioDetailPage /> },
   { path: "/karir", element: <Karir /> },
-  { path: "/karir/:id", element: <JobDetail /> },
+  { path: "/karir/:id", element: <JobDetailPublic /> }, // JobDetail untuk publik
   { path: "/karir/apply/:id", element: <ApplicationForm /> },
   { path: "/login", element: <Login /> },
 
@@ -98,7 +98,7 @@ export const routes = (userRole) => [
     path: "/admin/jobs/:id",
     element: (
       <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
-        <JobDetail />
+        <JobDetailAdmin /> {/* JobDetail untuk admin */}
       </ProtectedRoute>
     ),
   },
@@ -150,14 +150,6 @@ export const routes = (userRole) => [
       </ProtectedRoute>
     ),
   },
-  {
-    path: "/admin/portofolio",
-    element: (
-      <ProtectedRoute role={userRole} requiredRoles={["admin", "superadmin"]}>
-        <PortfolioManagement />
-      </ProtectedRoute>
-    ),
-  },
 
   // Superadmin routes
   {
@@ -184,4 +176,7 @@ export const routes = (userRole) => [
       </ProtectedRoute>
     ),
   },
+
+  // Fallback route (redirect to home if no route matches)
+  { path: "*", element: <Navigate to="/" /> },
 ];

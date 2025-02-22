@@ -1,11 +1,10 @@
 {
-  
-    "header": {
-      "home": "Beranda",
-      "about_us": "Tentang Kami",
-      "portfolio": "Portofolio",
-      "career": "Karir",
-      "contact": "Kontak"
+  "header": {
+    "home": "Beranda",
+    "about_us": "Tentang Kami",
+    "portfolio": "Portofolio",
+    "career": "Karir",
+    "contact": "Kontak"
   },
   "footer": {
     "about_us": "Tentang Kami",
@@ -19,9 +18,8 @@
     "phone": "Telepon",
     "address": "Alamat",
     "social_media": "Media Sosial",
-    "copyright": "Hak cipta dilindungi"
+    "copyright": "Hak cipta dilindungi."
   },
-
   "careers": {
     "title": "Bergabunglah dengan Tim Kami",
     "subtitle": "Kami mencari individu berbakat yang siap berkembang bersama kami. Temukan posisi yang sesuai dengan keahlian dan minat Anda.",
@@ -33,10 +31,9 @@
       "medan": "Medan"
     },
     "reset": "Atur Ulang Filter",
-    "results": "Menampilkan {{count}} lowongan pekerjaan tersedia",
+    "results": "Menampilkan {{count}} lowongan pekerjaan tersedia.",
     "noResults": "Tidak ada lowongan yang cocok dengan pencarian Anda."
   },
-
   "jobDetail": {
     "notFound": "Lowongan tidak ditemukan.",
     "backToJobs": "Kembali ke Daftar Lowongan",
@@ -44,13 +41,11 @@
     "requirements": "Persyaratan",
     "applyNow": "Lamar Pekerjaan"
   },
-
   "jobList": {
     "noJobs": "Maaf, belum ada lowongan pekerjaan yang tersedia.",
     "salaryNotMentioned": "Gaji tidak disebutkan",
     "viewDetails": "Lihat Detail"
   },
-
   "applyJob": {
     "notFound": "Pekerjaan tidak ditemukan.",
     "backToJobs": "Kembali ke Daftar Lowongan",
@@ -60,7 +55,6 @@
     "experience": "Tingkat Pengalaman",
     "department": "Departemen"
   },
-
   "application": {
     "fullName": "Nama Lengkap",
     "email": "Email",
@@ -70,12 +64,10 @@
     "sending": "Mengirim...",
     "successMessage": "Lamaran berhasil dikirim!"
   },
-
   "contactUs": {
     "title": "Hubungi Kami",
     "description": "Kami siap membantu! Jangan ragu untuk menghubungi kami."
   },
-
   "contact": {
     "title": "Hubungi Kami",
     "email": "Email",
@@ -91,14 +83,13 @@
     "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31693.600000000007!2d98.6659279!3d3.5951955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x303131f2c72a3ed9%3A0x47d4c4fbee88888!2sSeroja%20Medan%20Group!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
   },
   "faq": {
-  "title": "Pertanyaan Umum (FAQ)",
-  "items": [
-    { "question": "Bagaimana cara menghubungi customer service?", "answer": "Anda bisa menghubungi kami melalui WhatsApp atau email." },
-    { "question": "Berapa lama waktu respon dari tim kami?", "answer": "Biasanya kami akan merespons dalam waktu 24 jam pada hari kerja." },
-    { "question": "Apakah tersedia layanan konsultasi?", "answer": "Ya, kami menyediakan layanan konsultasi. Silakan hubungi kami untuk informasi lebih lanjut." }
-  ]
-},
-
+    "title": "Pertanyaan Umum (FAQ)",
+    "items": [
+      { "question": "Bagaimana cara menghubungi customer service?", "answer": "Anda bisa menghubungi kami melalui WhatsApp atau email." },
+      { "question": "Berapa lama waktu respon dari tim kami?", "answer": "Biasanya kami akan merespons dalam waktu 24 jam pada hari kerja." },
+      { "question": "Apakah tersedia layanan konsultasi?", "answer": "Ya, kami menyediakan layanan konsultasi. Silakan hubungi kami untuk informasi lebih lanjut." }
+    ]
+  },
   "portfolio": {
     "title": "Daftar Portofolio",
     "categories": {
@@ -110,7 +101,7 @@
     "no_categories": "Tidak ada kategori yang tersedia.",
     "no_testimonials": "Tidak ada testimonial yang tersedia.",
     "video_title": "Video Tentang Kami",
-     "no_results": "Tidak ada hasil ditemukan untuk kategori ini.",
+    "no_results": "Tidak ada hasil ditemukan untuk kategori ini.",
     "view_details": "Lihat Detail",
     "all_categories": "Semua Kategori",
     "loading": "Memuat portofolio...",
@@ -121,19 +112,17 @@
     "updated": "Diperbarui",
     "contactViaWhatsApp": "Hubungi Kami via WhatsApp",
     "whatsappMessage": "Halo, saya tertarik dengan portofolio {{title}}.",
-    "backToCategory": "Kembali ke Daftar {{category}}",
+    "backToCategory": "Kembali ke Daftar Portofolio",
     "placeholder": "Cari portofolio..."
-    
   },
   "testimonial": {
     "title": "Apa Kata Klien Kami?"
   },
   "videoSection": {
-    "title":  "Portofolio",
+    "title": "Portofolio",
     "videoTitle": "Portofolio"
   },
   "search": {
     "placeholder": "Cari..."
   }
-
 }

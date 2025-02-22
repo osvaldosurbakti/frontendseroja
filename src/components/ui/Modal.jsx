@@ -2,7 +2,17 @@ import React, { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Loader2 } from "lucide-react";
 
-const Modal = ({ isOpen, onClose, children, isLoading = false }) => {
+const Modal = ({
+  isOpen,
+  onClose,
+  children,
+  isLoading = false,
+  onConfirm, // Fungsi untuk konfirmasi
+  confirmText = "Ya", // Teks tombol konfirmasi
+  cancelText = "Tidak", // Teks tombol batal
+  message = "Apakah Anda yakin?", // Pesan konfirmasi
+  isConfirmModal = false, // Mode modal konfirmasi
+}) => {
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -50,7 +60,31 @@ const Modal = ({ isOpen, onClose, children, isLoading = false }) => {
                 <Loader2 size={40} className="animate-spin text-gray-600" />
               </div>
             ) : (
-              children
+              <>
+                {/* Tampilkan pesan konfirmasi jika isConfirmModal true */}
+                {isConfirmModal && (
+                  <div className="text-center">
+                    <p className="text-lg text-gray-700 mb-6">{message}</p>
+                    <div className="flex justify-center gap-4">
+                      <button
+                        onClick={onConfirm}
+                        className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
+                      >
+                        {confirmText}
+                      </button>
+                      <button
+                        onClick={onClose}
+                        className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg"
+                      >
+                        {cancelText}
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Tampilkan children jika bukan modal konfirmasi */}
+                {!isConfirmModal && children}
+              </>
             )}
           </motion.div>
         </div>
