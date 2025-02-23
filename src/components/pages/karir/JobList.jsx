@@ -27,41 +27,54 @@ const JobList = ({ jobs }) => {
           key={job._id}
           className="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 border border-gray-200"
         >
-          {/* Posisi Pekerjaan */}
+          {/* Job Title */}
           <h2 className="text-xl font-bold text-gray-800">{job.title}</h2>
-          
-          {/* Lokasi */}
+
+          {/* Job Location */}
           <div className="flex items-center text-gray-600 mt-2">
             <FaMapMarkerAlt className="mr-2 text-blue-600" />
             <p>{job.location}</p>
           </div>
 
-          {/* Gaji */}
+          {/* Salary Range */}
           <div className="flex items-center text-gray-500 text-sm mt-2">
             <FaMoneyBillWave className="mr-2 text-green-500" />
             <p>{job.salaryRange || t("jobList.salaryNotMentioned")}</p>
           </div>
 
-          {/* Jenis Pekerjaan */}
+          {/* Employment Type */}
           <div className="flex items-center text-gray-600 text-sm mt-2">
             <FaBriefcase className="mr-2 text-purple-500" />
             <p>{job.employmentType}</p>
           </div>
 
-          {/* Tingkat Pengalaman */}
+          {/* Experience Level */}
           <div className="flex items-center text-gray-600 text-sm mt-2">
             <FaUserGraduate className="mr-2 text-orange-500" />
             <p>{job.experienceLevel}</p>
           </div>
 
-          {/* Tombol Detail */}
-          <Link
-            to={`/karir/${job._id}`}
-            className="mt-4 inline-flex items-center text-blue-600 font-medium hover:underline"
-          >
-            {t("jobList.viewDetails")}
-            <FaArrowRight className="ml-2" />
-          </Link>
+          {/* Button Container */}
+          <div className="mt-4 flex flex-col sm:flex-row gap-2">
+            {/* View Details Button */}
+            <Link
+              to={`/karir/${job._id}`}
+              className="flex-1 inline-flex items-center justify-center text-blue-600 font-medium hover:underline border border-blue-600 rounded-md py-2 px-4 transition duration-300 hover:bg-blue-50"
+            >
+              {t("jobList.viewDetails")}
+              <FaArrowRight className="ml-2" />
+            </Link>
+
+            {/* Apply Button */}
+            <button
+              onClick={() => {
+                window.location.href = `/karir/apply/${job._id}`;
+              }}
+              className="flex-1 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300"
+            >
+              {t("jobList.apply")}
+            </button>
+          </div>
         </div>
       ))}
     </div>

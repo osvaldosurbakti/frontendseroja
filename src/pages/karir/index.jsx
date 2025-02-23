@@ -19,7 +19,7 @@ const Careers = () => {
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-6">
-        {/* Header Halaman */}
+        {/* Page Header */}
         <header className="text-center mb-12 animate-fade-in">
           <h1 className="text-5xl font-extrabold text-gray-800 leading-tight">
             {t("careers.title")}
@@ -29,9 +29,9 @@ const Careers = () => {
           </p>
         </header>
 
-        {/* Filter Pencarian */}
+        {/* Search and Filter Section */}
         <div className="mb-8 flex flex-col md:flex-row items-center justify-center gap-4">
-          {/* Input Pencarian */}
+          {/* Search Input */}
           <div className="relative w-full md:w-1/3">
             <FaSearch className="absolute left-3 top-3 text-gray-400" />
             <input
@@ -43,7 +43,7 @@ const Careers = () => {
             />
           </div>
 
-          {/* Dropdown Lokasi */}
+          {/* Location Filter */}
           <div className="relative w-full md:w-1/3">
             <FaMapMarkerAlt className="absolute left-3 top-3 text-gray-400" />
             <select
@@ -58,7 +58,7 @@ const Careers = () => {
             </select>
           </div>
 
-          {/* Tombol Reset */}
+          {/* Reset Button */}
           {(search || filterLocation) && (
             <button
               onClick={() => {
@@ -72,14 +72,14 @@ const Careers = () => {
           )}
         </div>
 
-        {/* Menampilkan Jumlah Lowongan */}
+        {/* Job Count */}
         <p className="text-gray-600 text-center mb-6">
           {filteredJobs.length > 0
             ? t("careers.results", { count: filteredJobs.length })
             : t("careers.noResults")}
         </p>
 
-        {/* Daftar Lowongan */}
+        {/* Job List */}
         <JobList jobs={filteredJobs} />
       </div>
     </section>
