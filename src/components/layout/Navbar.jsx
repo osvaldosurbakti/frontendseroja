@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaBars, FaTimes, FaCircle } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
+import logo from "../../assets/images/logo.png";
+
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,7 +33,7 @@ const Navbar = () => {
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-3 text-2xl font-bold hover:opacity-80 transition duration-300">
           <img
-            src="src/assets/images/logo.png"
+            src={logo}
             alt="Seroja Medan Group Logo"
             className="h-12 w-12 rounded-lg shadow-md transform hover:scale-110 transition-transform duration-300"
           />
