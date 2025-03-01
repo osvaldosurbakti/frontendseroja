@@ -33,8 +33,28 @@ const portfolioItems = [
     updatedAt: "2025-02-05",
     status: "active",
   },
-  // Add more items here...
-
+  {
+    _id: "4",
+    title: "Pembangunan Gedung Apartemen",
+    category: { id: "konstruksi-gedung", name: "Konstruksi Gedung" },
+    description: "Proyek pembangunan gedung apartemen dengan fasilitas modern di Bandung.",
+    imageUrl: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d",
+    createdBy: "admin125",
+    createdAt: "2025-01-15",
+    updatedAt: "2025-02-07",
+    status: "active",
+  },
+  {
+    _id: "5",
+    title: "Pembangunan Gedung Sekolah",
+    category: { id: "konstruksi-gedung", name: "Konstruksi Gedung" },
+    description: "Proyek pembangunan gedung sekolah dengan fasilitas lengkap di Yogyakarta.",
+    imageUrl: "https://images.unsplash.com/photo-1472289065668-ce650ac443d2",
+    createdBy: "admin126",
+    createdAt: "2025-01-18",
+    updatedAt: "2025-02-08",
+    status: "active",
+  },
   // Konstruksi Sipil
   {
     _id: "7",
