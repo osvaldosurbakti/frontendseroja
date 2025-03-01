@@ -6,6 +6,28 @@
     "career": "Career",
     "contact": "Contact"
   },
+  "visionMission": {
+    "title": "Vision & Mission",
+    "visionTitle": "Vision",
+    "visionText": "To become a leading company in providing the best solutions for customers.",
+    "missionTitle": "Mission",
+    "mission1": "Providing high-quality services.",
+    "mission2": "Innovating according to customer needs.",
+    "mission3": "Making a positive contribution to society."
+  },
+  "companyProfile": {
+    "title": "Company Profile",
+    "description": "We are a company dedicated to providing the best services to our customers. With years of experience, we continue to grow and innovate to deliver the best solutions tailored to our customers' needs."
+  },
+  "about": {
+    "title": "About Us",
+    "description": "We are a company dedicated to providing the best services to customers with innovation and excellence.",
+    "learnMore": "Learn More"
+  },
+  "hero": {
+    "title": "Welcome to Our Company",
+    "description": "We provide the best solutions for your business needs with innovation and dedication."
+  },
   "footer": {
     "about_us": "About Us",
     "about_description": "Seroja Medan Group is a leading company in construction and design, committed to providing the best solutions for our clients.",
@@ -156,7 +178,29 @@
     "title": "Our Location",
     "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31693.600000000007!2d98.6659279!3d3.5951955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x303131f2c72a3ed9%3A0x47d4c4fbee88888!2sSeroja%20Medan%20Group!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
   },
+ "cta": {
+    "title": "Join Us",
+    "description": "Make your dream project a reality with our best services.",
+    "button": "Contact Us"
+  },
+  "partners": {
+    "title": "Our Partners",
+    "subtitle": "We have partnered with the best companies to provide quality solutions for you.",
+    "stats": "🌟 Partnering with over 10+ professional partners across various fields."
+  },
+  "stats": {
+    "title": "Facts & Figures",
+    "subtitle": "We take pride in achieving great milestones with our trusted partners and professional team.",
+    "completedProjects": "Completed Projects",
+    "satisfiedClients": "Satisfied Clients",
+    "yearsExperience": "Years of Experience",
+    "professionalTeam": "Professional Team"
+  },
   "portfolio": {
+    "preview_title": "Our Portfolio",
+    "preview_description": "Here are some of our latest projects that we have successfully completed.",
+    "view_more": "View More",
+    "no_data": "No portfolio available at the moment.",
     "title": "Portfolio",
     "categories": {
       "building_construction": "Building Construction",

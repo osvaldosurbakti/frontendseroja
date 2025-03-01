@@ -1,16 +1,18 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const HeroSection = () => {
+  const { t } = useTranslation();
+
   return (
-    <section className="bg-blue-600 text-white py-20">
-      <div className="container mx-auto text-center">
-        <h1 className="text-4xl font-bold mb-4">Selamat Datang di Perusahaan Kami</h1>
-        <p className="text-lg mb-6">
-          Kami memberikan solusi terbaik untuk kebutuhan bisnis Anda.
+    <section className="bg-gradient-to-r from-blue-700 to-blue-500 text-white py-24">
+      <div className="container mx-auto text-center animate-fade-in">
+        <h1 className="text-5xl font-extrabold mb-4 drop-shadow-lg">
+          {t("hero.title")}
+        </h1>
+        <p className="text-lg max-w-2xl mx-auto leading-relaxed">
+          {t("hero.description")}
         </p>
-        <button className="px-6 py-3 bg-white text-blue-600 rounded-lg font-medium hover:bg-gray-100">
-          Pelajari Lebih Lanjut
-        </button>
       </div>
     </section>
   );

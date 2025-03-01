@@ -11,9 +11,6 @@ const TentangKami = () => {
   return (
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-6">
-        <h1 className="text-5xl font-extrabold text-center text-blue-700 mb-12">
-          Tentang Kami
-        </h1>
         <CompanyProfile />
         <VisionMission />
         <TeamList />

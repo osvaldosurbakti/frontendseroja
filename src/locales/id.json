@@ -6,6 +6,46 @@
     "career": "Karir",
     "contact": "Kontak"
   },
+  "visionMission": {
+    "title": "Visi & Misi",
+    "visionTitle": "Visi",
+    "visionText": "Menjadi perusahaan terkemuka dalam memberikan solusi terbaik bagi pelanggan.",
+    "missionTitle": "Misi",
+    "mission1": "Memberikan layanan berkualitas tinggi.",
+    "mission2": "Berinovasi sesuai kebutuhan pelanggan.",
+    "mission3": "Memberikan kontribusi positif bagi masyarakat."
+  },
+  "companyProfile": {
+    "title": "Profil Perusahaan",
+    "description": "Kami adalah perusahaan yang berdedikasi dalam memberikan layanan terbaik kepada pelanggan kami. Dengan pengalaman bertahun-tahun, kami terus berkembang dan berinovasi untuk memberikan solusi terbaik sesuai kebutuhan pelanggan."
+  },
+  "cta": {
+    "title": "Bergabung Bersama Kami",
+    "description": "Jadikan proyek impian Anda menjadi kenyataan dengan layanan terbaik kami.",
+    "button": "Hubungi Kami"
+  },
+  "partners": {
+    "title": "Mitra Kami",
+    "subtitle": "Kami telah bermitra dengan perusahaan terbaik untuk menghadirkan solusi berkualitas bagi Anda.",
+    "stats": "🌟 Bekerja sama dengan lebih dari 10+ mitra profesional di berbagai bidang."
+  },
+  "stats": {
+    "title": "Fakta & Angka",
+    "subtitle": "Kami bangga telah mencapai berbagai pencapaian luar biasa bersama mitra terpercaya dan tim profesional kami.",
+    "completedProjects": "Proyek Selesai",
+    "satisfiedClients": "Klien Puas",
+    "yearsExperience": "Tahun Pengalaman",
+    "professionalTeam": "Tim Profesional"
+  },
+  "about": {
+    "title": "Tentang Kami",
+    "description": "Kami adalah perusahaan yang berdedikasi untuk memberikan layanan terbaik kepada pelanggan dengan inovasi dan keunggulan.",
+    "learnMore": "Pelajari Lebih Lanjut"
+  },
+  "hero": {
+    "title": "Selamat Datang di Perusahaan Kami",
+    "description": "Kami memberikan solusi terbaik untuk kebutuhan bisnis Anda dengan inovasi dan dedikasi tinggi."
+  },
   "footer": {
     "about_us": "Tentang Kami",
     "about_description": "Seroja Medan Group adalah perusahaan terkemuka di bidang konstruksi dan desain, berkomitmen untuk memberikan solusi terbaik bagi klien kami.",
@@ -146,7 +186,10 @@
       { "question": "Apakah tersedia layanan konsultasi?", "answer": "Ya, kami menyediakan layanan konsultasi. Silakan hubungi kami untuk informasi lebih lanjut." }
     ]
   },
-  "portfolio": {
+  "portfolio": { "preview_title": "Portofolio Kami",
+  "preview_description": "Berikut adalah beberapa proyek terbaru yang telah kami selesaikan dengan sukses.",
+  "view_more": "Lihat Selengkapnya",
+  "no_data": "Belum ada portofolio yang tersedia saat ini.",
     "title": "Daftar Portofolio",
     "categories": {
       "building_construction": "Konstruksi Gedung",
